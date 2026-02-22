@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tongs & Sac à Dos — Le carnet de route d'Élodie & Flo</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Caveat:wght@400;700&family=Nunito:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --parchment: #f7f2e8;
+      --ink: #2b2416;
+      --ink-light: #5c4f3a;
+      --china: #d94f26;
+      --indonesia: #2d9463;
+      --australia: #e07b1a;
+      --nz: #2563a8;
+      --easterisland: #7c3faa;
+      --patagonia: #1a7060;
+      --bolivia: #c48a20;
+      --road: #b8a98a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--parchment);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ===================== NOISE TEXTURE OVERLAY ===================== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.3;
+    }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 30%, #fff9ee, var(--parchment));
+    }
+
+    .hero-bg-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, #c8b89a 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.3;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 900;
+      line-height: 0.95;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title .line1 {
+      color: var(--ink);
+    }
+
+    .hero-title .line2 {
+      color: var(--china);
+      font-style: italic;
+      display: block;
+    }
+
+    .hero-subtitle {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--ink-light);
+      margin-top: 1rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 2.5rem;
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat .number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--china);
+      display: block;
+    }
+
+    .hero-stat .label {
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      color: var(--ink-light);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--ink-light);
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      animation: bounce 2s infinite;
+      z-index: 2;
+    }
+
+    .scroll-hint svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(8px);
+      }
+    }
+
+    /* ===================== ROAD MAP NAV ===================== */
+    .road-nav {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      background: var(--ink);
+      padding: 0 2rem;
+      overflow: hidden;
+    }
+
+    .road-track {
+      position: relative;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Road line */
+    .road-track::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: repeating-linear-gradient(90deg, var(--road) 0px, var(--road) 20px, transparent 20px, transparent 30px);
+      transform: translateY(-50%);
+      border-radius: 2px;
+    }
+
+    .road-destinations {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .road-dest {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+      gap: 4px;
+    }
+
+    .road-dest:hover {
+      transform: translateY(-3px);
+    }
+
+    .dest-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 3px solid var(--parchment);
+      transition: transform 0.2s, box-shadow 0.2s;
+      background: var(--road);
+    }
+
+    .road-dest:hover .dest-dot,
+    .road-dest.active .dest-dot {
+      transform: scale(1.4);
+      box-shadow: 0 0 0 3px currentColor;
+    }
+
+    .road-dest:nth-child(1) .dest-dot {
+      background: var(--china);
+      color: var(--china);
+    }
+
+    .road-dest:nth-child(2) .dest-dot {
+      background: var(--indonesia);
+      color: var(--indonesia);
+    }
+
+    .road-dest:nth-child(3) .dest-dot {
+      background: var(--australia);
+      color: var(--australia);
+    }
+
+    .road-dest:nth-child(4) .dest-dot {
+      background: var(--nz);
+      color: var(--nz);
+    }
+
+    .road-dest:nth-child(5) .dest-dot {
+      background: var(--easterisland);
+      color: var(--easterisland);
+    }
+
+    .road-dest:nth-child(6) .dest-dot {
+      background: var(--patagonia);
+      color: var(--patagonia);
+    }
+
+    .road-dest:nth-child(7) .dest-dot {
+      background: var(--bolivia);
+      color: var(--bolivia);
+    }
+
+    .dest-label {
+      font-family: 'Caveat', cursive;
+      font-size: 0.75rem;
+      color: #c8b89a;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+
+    .road-dest:hover .dest-label,
+    .road-dest.active .dest-label {
+      color: white;
+    }
+
+    /* The VAN on road */
+    .van-on-road {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-78%);
+      transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .van-on-road svg {
+      width: 60px;
+      height: 45px;
+      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.6));
+    }
+
+    /* Van drive animation */
+    @keyframes vanWobble {
+
+      0%,
+      100% {
+        transform: translateY(-78%) rotate(0deg);
+      }
+
+      25% {
+        transform: translateY(-82%) rotate(-1deg);
+      }
+
+      75% {
+        transform: translateY(-74%) rotate(1deg);
+      }
+    }
+
+    .van-on-road.driving {
+      animation: vanWobble 0.4s ease-in-out infinite;
+    }
+
+    /* ===================== DESTINATION SECTIONS ===================== */
+    .destination {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .dest-header {
+      padding: 5rem 2rem 3rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 60vh;
+      justify-content: center;
+    }
+
+    .dest-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(8rem, 20vw, 18rem);
+      font-weight: 900;
+      position: absolute;
+      opacity: 0.06;
+      line-height: 1;
+      user-select: none;
+      color: currentColor;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .dest-stamp {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 4px solid currentColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+      animation: stampAppear 0.5s ease-out backwards;
+    }
+
+    @keyframes stampAppear {
+      from {
+        transform: scale(0) rotate(-30deg);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    .dest-dates {
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      opacity: 0.7;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 0.5rem;
+    }
+
+    .dest-country {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 1;
+      position: relative;
+      z-index: 2;
+    }
+
+    .dest-tagline {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      opacity: 0.8;
+      margin-top: 0.75rem;
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+    }
+
+    .dest-km {
+      display: inline-block;
+      border: 2px dashed currentColor;
+      border-radius: 30px;
+      padding: 0.4rem 1.2rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      position: relative;
+      z-index: 2;
+      opacity: 0.8;
+    }
+
+    /* Section color themes */
+    .dest-chine {
+      color: var(--china);
+      background: linear-gradient(160deg, #fff5f2, #ffeee8);
+    }
+
+    .dest-indonesie {
+      color: var(--indonesia);
+      background: linear-gradient(160deg, #f0fff6, #e0f8ed);
+    }
+
+    .dest-australie {
+      color: var(--australia);
+      background: linear-gradient(160deg, #fff8f0, #fff0dc);
+    }
+
+    .dest-nz {
+      color: var(--nz);
+      background: linear-gradient(160deg, #f0f6ff, #e0eeff);
+    }
+
+    .dest-easterisland {
+      color: var(--easterisland);
+      background: linear-gradient(160deg, #faf0ff, #f0e0ff);
+    }
+
+    .dest-patagonie {
+      color: var(--patagonia);
+      background: linear-gradient(160deg, #f0fff8, #dff8f2);
+    }
+
+    .dest-bolivie {
+      color: var(--bolivia);
+      background: linear-gradient(160deg, #fffbf0, #fff5d8);
+    }
+
+    /* ===================== CONTENT CARDS ===================== */
+    .dest-content {
+      padding: 0 2rem 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .highlight-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+      border-left: 5px solid currentColor;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .highlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 80px;
+      height: 80px;
+      background: currentColor;
+      opacity: 0.05;
+      border-radius: 0 0 0 80px;
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .highlight-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .highlight-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+
+    .highlight-text {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--ink-light);
+    }
+
+    /* Full article expand */
+    .article-toggle {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      padding: 1rem 1.5rem;
+      background: white;
+      border-radius: 12px;
+      border: 2px solid currentColor;
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem;
+      color: inherit;
+      transition: all 0.3s;
+      margin-top: 1rem;
+      width: 100%;
+      text-align: left;
+    }
+
+    .article-toggle:hover {
+      background: currentColor;
+      color: white;
+    }
+
+    .article-toggle:hover .toggle-arrow {
+      transform: rotate(90deg);
+    }
+
+    .article-toggle.open .toggle-arrow {
+      transform: rotate(90deg);
+    }
+
+    .toggle-arrow {
+      transition: transform 0.3s;
+      font-size: 1rem;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .article-full {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      background: white;
+      border-radius: 0 0 12px 12px;
+      border: 2px solid transparent;
+      border-top: none;
+    }
+
+    .article-full.open {
+      max-height: 5000px;
+      border-color: currentColor;
+      border-top: none;
+    }
+
+    .article-inner {
+      padding: 2rem;
+      line-height: 1.8;
+      color: var(--ink-light);
+      font-size: 0.95rem;
+    }
+
+    .article-inner h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--ink);
+      margin: 1.5rem 0 0.5rem;
+      border-bottom: 2px dashed currentColor;
+      padding-bottom: 0.25rem;
+    }
+
+    .article-inner h3:first-child {
+      margin-top: 0;
+    }
+
+    .article-inner p {
+      margin-bottom: 1rem;
+    }
+
+    /* ===================== DIVIDER - VAN ON ROAD ===================== */
+    .section-divider {
+      height: 80px;
+      background: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .divider-road {
+      width: 100%;
+      height: 4px;
+      background: repeating-linear-gradient(90deg, var(--road) 0, var(--road) 20px, transparent 20px, transparent 30px);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .divider-van {
+      position: relative;
+      z-index: 2;
+      animation: dividerDrive 4.3s linear infinite;
+    }
+
+    .divider-van svg {
+      width: 80px;
+      height: 60px;
+    }
+
+    @keyframes dividerDrive {
+      from {
+        transform: translateX(-60vw);
+      }
+
+      to {
+        transform: translateX(60vw);
+      }
+    }
+
+    /* ===================== FOOTER ===================== */
+    .site-footer {
+      background: var(--ink);
+      color: var(--parchment);
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .footer-sub {
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      opacity: 0.6;
+      margin-bottom: 2rem;
+    }
+
+    .footer-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-stat {
+      text-align: center;
+    }
+
+    .footer-stat .n {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--china);
+      display: block;
+    }
+
+    .footer-stat .l {
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      opacity: 0.6;
+    }
+
+    .footer-van {
+      margin-top: 3rem;
+      opacity: 0.2;
+    }
+
+    .footer-van svg {
+      width: 120px;
+    }
+
+    /* ===================== SCROLL REVEAL ===================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: 0.4s;
+    }
+
+    /* ===================== POSTCARD QUOTE ===================== */
+    .postcard {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      position: relative;
+      border-left: 6px solid currentColor;
+    }
+
+    .postcard-text {
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+
+    .postcard-from {
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      margin-top: 0.75rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+    }
+
+    .postcard-stamp {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      opacity: 0.3;
+      transform: rotate(12deg);
+    }
+
+    /* ===================== TIPS ===================== */
+    .tips-box {
+      background: #fffdf5;
+      border: 2px dashed currentColor;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tips-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tips-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .tips-list li {
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .tips-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: currentColor;
+      font-weight: 700;
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 768px) {
+      .dest-label {
+        display: none;
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+      }
+
+      .highlights-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .divider-van {
+        animation-duration: 3s;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="top">
+    <div class="hero-bg-dots"></div>
+
+    <!-- Big decorative van SVG -->
+    <div style="position:absolute;bottom:-20px;right:-40px;opacity:0.07;transform:scaleX(-1);">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="500" height="375">
+        <circle cx="580" cy="220" r="110" fill="#F4A261" opacity="0.15" />
+        <circle cx="580" cy="220" r="75" fill="#E9C46A" opacity="0.3" />
+        <line x1="80" y1="492" x2="720" y2="492" stroke="#D3D3D3" stroke-width="2" stroke-linecap="round" />
+        <ellipse cx="400" cy="492" rx="280" ry="8" fill="#000000" opacity="0.15" />
+        <polygon points="210,165 480,225 210,225" fill="#D4C5B0" />
+        <polygon points="230,185 350,220 230,220" fill="#2A2A2A" opacity="0.4" />
+        <path d="M 190 160 L 500 220 C 510 222 510 225 500 225 L 190 168 C 180 166 180 162 190 160 Z" fill="#FDFBF7" />
+        <path d="M 150 330 L 165 240 C 170 230 180 225 190 225 L 540 225 C 560 225 570 230 580 245 L 615 330 Z"
+          fill="#FDFBF7" />
+        <path
+          d="M 150 330 L 615 330 C 625 350 650 355 655 380 L 655 420 C 655 440 645 450 625 450 L 165 450 C 155 450 150 440 150 420 Z"
+          fill="#2A9D8F" />
+        <path d="M 150 330 L 615 330 L 617 336 L 150 336 Z" fill="#E9C46A" />
+        <path d="M 150 339 L 618 339 L 620 342 L 150 342 Z" fill="#E76F51" />
+        <path d="M 195 450 C 195 385, 315 385, 315 450 Z" fill="#1A1A1A" />
+        <path d="M 485 450 C 485 385, 605 385, 605 450 Z" fill="#1A1A1A" />
+        <circle cx="255" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="255" cy="450" r="24" fill="#EEEEEE" />
+        <circle cx="255" cy="450" r="14" fill="#999999" />
+        <circle cx="252" cy="447" r="5" fill="#FFFFFF" opacity="0.7" />
+        <circle cx="545" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="545" cy="450" r="24" fill="#EEEEEE" />
+        <circle cx="545" cy="450" r="14" fill="#999999" />
+        <circle cx="542" cy="447" r="5" fill="#FFFFFF" opacity="0.7" />
+        <rect x="180" y="245" width="80" height="65" rx="6" fill="#1C2833" />
+        <rect x="275" y="245" width="100" height="65" rx="6" fill="#1C2833" />
+        <rect x="390" y="245" width="90" height="65" rx="6" fill="#1C2833" />
+        <path d="M 495 245 L 565 245 C 570 245 575 248 578 253 L 602 305 C 605 310 600 310 595 310 L 495 310 Z"
+          fill="#1C2833" />
+        <line x1="565" y1="285" x2="540" y2="310" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" />
+        <ellipse cx="560" cy="285" rx="4" ry="16" fill="#1A1A1A" transform="rotate(25 560 285)" />
+        <polygon points="260,230 300,320 220,320 180,230" fill="#FFFFFF" opacity="0.1" />
+        <polygon points="460,230 500,320 420,320 380,230" fill="#FFFFFF" opacity="0.1" />
+        <path d="M 380 245 L 380 445" stroke="#1A1A1A" stroke-width="1.5" opacity="0.2" fill="none" />
+        <path d="M 490 245 L 490 445" stroke="#1A1A1A" stroke-width="1.5" opacity="0.2" fill="none" />
+        <rect x="470" y="345" width="15" height="5" rx="2" fill="#E0E0E0" />
+        <path d="M 270 245 L 270 445" stroke="#1A1A1A" stroke-width="1.5" opacity="0.2" fill="none" />
+        <rect x="360" y="345" width="12" height="5" rx="2" fill="#E0E0E0" />
+        <path d="M 650 355 C 660 355 665 365 665 375 C 665 385 660 395 650 395 Z" fill="#E0E0E0" />
+        <path d="M 652 358 C 658 358 662 365 662 375 C 662 385 658 392 652 392 Z" fill="#FFFFFF" />
+        <path d="M 152 350 L 145 350 C 142 350 142 365 145 365 L 150 365 Z" fill="#E63946" />
+        <path d="M 152 365 L 145 365 C 142 365 142 370 145 370 L 150 370 Z" fill="#F4A261" />
+        <rect x="130" y="440" width="20" height="6" rx="2" fill="#555" />
+        <path d="M 160 425 L 135 425 C 130 425 130 440 135 440 L 155 440 Z" fill="#E0E0E0" />
+        <path d="M 160 425 L 135 425 C 130 425 130 430 135 430 L 155 430 Z" fill="#FFFFFF" opacity="0.6" />
+        <path d="M 640 425 L 670 425 C 675 425 675 440 670 440 L 635 440 Z" fill="#E0E0E0" />
+        <path d="M 640 425 L 670 425 C 675 425 675 430 670 430 L 635 430 Z" fill="#FFFFFF" opacity="0.6" />
+        <path d="M 655 330 C 685 330 685 390 655 390 Z" fill="#E76F51" />
+        <path d="M 655 345 C 670 345 670 375 655 375 Z" fill="#FDFBF7" />
+        <path d="M 590 280 L 610 270" stroke="#1A1A1A" stroke-width="2" />
+        <rect x="605" y="258" width="8" height="20" rx="3" fill="#E0E0E0" />
+        <g stroke="#FDFBF7" stroke-width="3" stroke-linecap="round" fill="none">
+          <circle cx="330" cy="390" r="22" />
+          <line x1="330" y1="368" x2="330" y2="412" />
+          <line x1="330" y1="390" x2="315" y2="408" />
+          <line x1="330" y1="390" x2="345" y2="408" />
+        </g>
+        <g transform="translate(220, 375) scale(0.65)">
+          <circle cx="0" cy="-14" r="7" fill="#FDFBF7" />
+          <circle cx="0" cy="14" r="7" fill="#FDFBF7" />
+          <circle cx="-14" cy="0" r="7" fill="#FDFBF7" />
+          <circle cx="14" cy="0" r="7" fill="#FDFBF7" />
+          <circle cx="-10" cy="-10" r="7" fill="#FDFBF7" />
+          <circle cx="10" cy="10" r="7" fill="#FDFBF7" />
+          <circle cx="-10" cy="10" r="7" fill="#FDFBF7" />
+          <circle cx="10" cy="-10" r="7" fill="#FDFBF7" />
+          <circle cx="0" cy="0" r="8" fill="#E9C46A" />
+        </g>
+        <g transform="translate(440, 400) scale(0.55)">
+          <circle cx="0" cy="-14" r="7" fill="#FDFBF7" />
+          <circle cx="0" cy="14" r="7" fill="#FDFBF7" />
+          <circle cx="-14" cy="0" r="7" fill="#FDFBF7" />
+          <circle cx="14" cy="0" r="7" fill="#FDFBF7" />
+          <circle cx="-10" cy="-10" r="7" fill="#FDFBF7" />
+          <circle cx="10" cy="10" r="7" fill="#FDFBF7" />
+          <circle cx="-10" cy="10" r="7" fill="#FDFBF7" />
+          <circle cx="10" cy="-10" r="7" fill="#FDFBF7" />
+          <circle cx="0" cy="0" r="8" fill="#E76F51" />
+        </g>
+        <g transform="translate(240, 280) scale(0.5)">
+          <circle cx="0" cy="-14" r="7" fill="#2A9D8F" />
+          <circle cx="0" cy="14" r="7" fill="#2A9D8F" />
+          <circle cx="-14" cy="0" r="7" fill="#2A9D8F" />
+          <circle cx="14" cy="0" r="7" fill="#2A9D8F" />
+          <circle cx="-10" cy="-10" r="7" fill="#2A9D8F" />
+          <circle cx="10" cy="10" r="7" fill="#2A9D8F" />
+          <circle cx="-10" cy="10" r="7" fill="#2A9D8F" />
+          <circle cx="10" cy="-10" r="7" fill="#2A9D8F" />
+          <circle cx="0" cy="0" r="8" fill="#E9C46A" />
+        </g>
+      </svg>
+    </div>
+
+    <div style="position:absolute;top:40px;left:40px;opacity:0.1;">
+      <svg width="80" height="80" viewBox="0 0 80 80">
+        <circle cx="40" cy="40" r="38" stroke="#2b2416" stroke-width="3" fill="none" />
+        <path d="M40 2 L40 78 M2 40 L78 40" stroke="#2b2416" stroke-width="2" />
+        <circle cx="40" cy="40" r="20" stroke="#2b2416" stroke-width="2" fill="none" />
+      </svg>
+    </div>
+
+    <div class="hero-title reveal">
+      <span class="line1">Tongs &amp;</span>
+      <span class="line2">Sac à Dos</span>
+    </div>
+    <p class="hero-subtitle reveal reveal-delay-1">Le carnet de route d'Élodie &amp; Flo · Tour du Monde 2019–2020</p>
+
+    <div class="hero-stats">
+      <div class="hero-stat reveal reveal-delay-1">
+        <span class="number">7</span>
+        <span class="label">destinations</span>
+      </div>
+      <div class="hero-stat reveal reveal-delay-2">
+        <span class="number">43 000</span>
+        <span class="label">kilomètres</span>
+      </div>
+      <div class="hero-stat reveal reveal-delay-3">
+        <span class="number">11</span>
+        <span class="label">mois de voyage</span>
+      </div>
+      <div class="hero-stat reveal reveal-delay-4">
+        <span class="number">∞</span>
+        <span class="label">souvenirs</span>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      Défiler pour partir
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===================== ROAD NAV ===================== -->
+  <nav class="road-nav" id="road-nav">
+    <div class="road-track">
+      <div class="road-destinations" id="road-destinations">
+        <div class="road-dest active" onclick="goTo(0)" data-idx="0">
+          <div class="dest-dot"></div>
+          <span class="dest-label">Chine</span>
+        </div>
+        <div class="road-dest" onclick="goTo(1)" data-idx="1">
+          <div class="dest-dot"></div>
+          <span class="dest-label">Indonésie</span>
+        </div>
+        <div class="road-dest" onclick="goTo(2)" data-idx="2">
+          <div class="dest-dot"></div>
+          <span class="dest-label">Australie</span>
+        </div>
+        <div class="road-dest" onclick="goTo(3)" data-idx="3">
+          <div class="dest-dot"></div>
+          <span class="dest-label">Nouvelle-Zélande</span>
+        </div>
+        <div class="road-dest" onclick="goTo(4)" data-idx="4">
+          <div class="dest-dot"></div>
+          <span class="dest-label">Île de Pâques</span>
+        </div>
+        <div class="road-dest" onclick="goTo(5)" data-idx="5">
+          <div class="dest-dot"></div>
+          <span class="dest-label">Patagonie</span>
+        </div>
+        <div class="road-dest" onclick="goTo(6)" data-idx="6">
+          <div class="dest-dot"></div>
+          <span class="dest-label">Bolivie</span>
+        </div>
+      </div>
+
+      <!-- The VAN -->
+      <div class="van-on-road" id="road-van">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="60" height="45">
+          <circle cx="580" cy="220" r="110" fill="#F4A261" opacity="0.15" />
+          <circle cx="580" cy="220" r="75" fill="#E9C46A" opacity="0.3" />
+          <line x1="80" y1="492" x2="720" y2="492" stroke="#D3D3D3" stroke-width="2" stroke-linecap="round" />
+          <ellipse cx="400" cy="492" rx="280" ry="8" fill="#000000" opacity="0.15" />
+          <polygon points="210,165 480,225 210,225" fill="#D4C5B0" />
+          <polygon points="230,185 350,220 230,220" fill="#2A2A2A" opacity="0.4" />
+          <path d="M 190 160 L 500 220 C 510 222 510 225 500 225 L 190 168 C 180 166 180 162 190 160 Z"
+            fill="#FDFBF7" />
+          <path d="M 150 330 L 165 240 C 170 230 180 225 190 225 L 540 225 C 560 225 570 230 580 245 L 615 330 Z"
+            fill="#FDFBF7" />
+          <path
+            d="M 150 330 L 615 330 C 625 350 650 355 655 380 L 655 420 C 655 440 645 450 625 450 L 165 450 C 155 450 150 440 150 420 Z"
+            fill="#2A9D8F" />
+          <path d="M 150 330 L 615 330 L 617 336 L 150 336 Z" fill="#E9C46A" />
+          <path d="M 150 339 L 618 339 L 620 342 L 150 342 Z" fill="#E76F51" />
+          <path d="M 195 450 C 195 385, 315 385, 315 450 Z" fill="#1A1A1A" />
+          <path d="M 485 450 C 485 385, 605 385, 605 450 Z" fill="#1A1A1A" />
+          <circle cx="255" cy="450" r="42" fill="#2B2B2B" />
+          <circle cx="255" cy="450" r="24" fill="#EEEEEE" />
+          <circle cx="255" cy="450" r="14" fill="#999999" />
+          <circle cx="252" cy="447" r="5" fill="#FFFFFF" opacity="0.7" />
+          <circle cx="545" cy="450" r="42" fill="#2B2B2B" />
+          <circle cx="545" cy="450" r="24" fill="#EEEEEE" />
+          <circle cx="545" cy="450" r="14" fill="#999999" />
+          <circle cx="542" cy="447" r="5" fill="#FFFFFF" opacity="0.7" />
+          <rect x="180" y="245" width="80" height="65" rx="6" fill="#1C2833" />
+          <rect x="275" y="245" width="100" height="65" rx="6" fill="#1C2833" />
+          <rect x="390" y="245" width="90" height="65" rx="6" fill="#1C2833" />
+          <path d="M 495 245 L 565 245 C 570 245 575 248 578 253 L 602 305 C 605 310 600 310 595 310 L 495 310 Z"
+            fill="#1C2833" />
+          <line x1="565" y1="285" x2="540" y2="310" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" />
+          <ellipse cx="560" cy="285" rx="4" ry="16" fill="#1A1A1A" transform="rotate(25 560 285)" />
+          <polygon points="260,230 300,320 220,320 180,230" fill="#FFFFFF" opacity="0.1" />
+          <polygon points="460,230 500,320 420,320 380,230" fill="#FFFFFF" opacity="0.1" />
+          <path d="M 380 245 L 380 445" stroke="#1A1A1A" stroke-width="1.5" opacity="0.2" fill="none" />
+          <path d="M 490 245 L 490 445" stroke="#1A1A1A" stroke-width="1.5" opacity="0.2" fill="none" />
+          <rect x="470" y="345" width="15" height="5" rx="2" fill="#E0E0E0" />
+          <path d="M 270 245 L 270 445" stroke="#1A1A1A" stroke-width="1.5" opacity="0.2" fill="none" />
+          <rect x="360" y="345" width="12" height="5" rx="2" fill="#E0E0E0" />
+          <path d="M 650 355 C 660 355 665 365 665 375 C 665 385 660 395 650 395 Z" fill="#E0E0E0" />
+          <path d="M 652 358 C 658 358 662 365 662 375 C 662 385 658 392 652 392 Z" fill="#FFFFFF" />
+          <path d="M 152 350 L 145 350 C 142 350 142 365 145 365 L 150 365 Z" fill="#E63946" />
+          <path d="M 152 365 L 145 365 C 142 365 142 370 145 370 L 150 370 Z" fill="#F4A261" />
+          <rect x="130" y="440" width="20" height="6" rx="2" fill="#555" />
+          <path d="M 160 425 L 135 425 C 130 425 130 440 135 440 L 155 440 Z" fill="#E0E0E0" />
+          <path d="M 160 425 L 135 425 C 130 425 130 430 135 430 L 155 430 Z" fill="#FFFFFF" opacity="0.6" />
+          <path d="M 640 425 L 670 425 C 675 425 675 440 670 440 L 635 440 Z" fill="#E0E0E0" />
+          <path d="M 640 425 L 670 425 C 675 425 675 430 670 430 L 635 430 Z" fill="#FFFFFF" opacity="0.6" />
+          <path d="M 655 330 C 685 330 685 390 655 390 Z" fill="#E76F51" />
+          <path d="M 655 345 C 670 345 670 375 655 375 Z" fill="#FDFBF7" />
+          <path d="M 590 280 L 610 270" stroke="#1A1A1A" stroke-width="2" />
+          <rect x="605" y="258" width="8" height="20" rx="3" fill="#E0E0E0" />
+          <g stroke="#FDFBF7" stroke-width="3" stroke-linecap="round" fill="none">
+            <circle cx="330" cy="390" r="22" />
+            <line x1="330" y1="368" x2="330" y2="412" />
+            <line x1="330" y1="390" x2="315" y2="408" />
+            <line x1="330" y1="390" x2="345" y2="408" />
+          </g>
+          <g transform="translate(220, 375) scale(0.65)">
+            <circle cx="0" cy="-14" r="7" fill="#FDFBF7" />
+            <circle cx="0" cy="14" r="7" fill="#FDFBF7" />
+            <circle cx="-14" cy="0" r="7" fill="#FDFBF7" />
+            <circle cx="14" cy="0" r="7" fill="#FDFBF7" />
+            <circle cx="-10" cy="-10" r="7" fill="#FDFBF7" />
+            <circle cx="10" cy="10" r="7" fill="#FDFBF7" />
+            <circle cx="-10" cy="10" r="7" fill="#FDFBF7" />
+            <circle cx="10" cy="-10" r="7" fill="#FDFBF7" />
+            <circle cx="0" cy="0" r="8" fill="#E9C46A" />
+          </g>
+          <g transform="translate(440, 400) scale(0.55)">
+            <circle cx="0" cy="-14" r="7" fill="#FDFBF7" />
+            <circle cx="0" cy="14" r="7" fill="#FDFBF7" />
+            <circle cx="-14" cy="0" r="7" fill="#FDFBF7" />
+            <circle cx="14" cy="0" r="7" fill="#FDFBF7" />
+            <circle cx="-10" cy="-10" r="7" fill="#FDFBF7" />
+            <circle cx="10" cy="10" r="7" fill="#FDFBF7" />
+            <circle cx="-10" cy="10" r="7" fill="#FDFBF7" />
+            <circle cx="10" cy="-10" r="7" fill="#FDFBF7" />
+            <circle cx="0" cy="0" r="8" fill="#E76F51" />
+          </g>
+          <g transform="translate(240, 280) scale(0.5)">
+            <circle cx="0" cy="-14" r="7" fill="#2A9D8F" />
+            <circle cx="0" cy="14" r="7" fill="#2A9D8F" />
+            <circle cx="-14" cy="0" r="7" fill="#2A9D8F" />
+            <circle cx="14" cy="0" r="7" fill="#2A9D8F" />
+            <circle cx="-10" cy="-10" r="7" fill="#2A9D8F" />
+            <circle cx="10" cy="10" r="7" fill="#2A9D8F" />
+            <circle cx="-10" cy="10" r="7" fill="#2A9D8F" />
+            <circle cx="10" cy="-10" r="7" fill="#2A9D8F" />
+            <circle cx="0" cy="0" r="8" fill="#E9C46A" />
+          </g>
+        </svg>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================== CHINE ===================== -->
+  <section class="destination dest-chine" id="dest-0">
+    <div class="dest-header">
+      <div class="dest-number">01</div>
+      <div class="dest-stamp reveal">🐉</div>
+      <p class="dest-dates reveal reveal-delay-1">Septembre – Octobre 2019 · 1 419 km</p>
+      <h2 class="dest-country reveal reveal-delay-2">Chine</h2>
+      <p class="dest-tagline reveal reveal-delay-3">« Au sud des nuages » — le Yunnan mystérieux</p>
+      <span class="dest-km reveal reveal-delay-4">🚌 Train · Bus · Auto-stop</span>
+    </div>
+
+    <div class="dest-content">
+      <div class="postcard reveal" style="color:var(--china)">
+        <span class="postcard-stamp">🏮</span>
+        <p class="postcard-text">« 不不不不 ! » — la réponse à toutes nos questions... et pourtant, chaque endroit était
+          plus magnifique que le précédent. Le Yunnan, c'est 6 semaines de paysages à couper le souffle entre forêts de
+          pierres, montagnes himalayennes et temples tibétains. »</p>
+        <p class="postcard-from">— Élodie & Flo, quelque part entre 2 500m et 4 000m d'altitude</p>
+      </div>
+
+      <div class="highlights-grid">
+        <div class="highlight-card reveal" style="color:var(--china)">
+          <span class="highlight-icon">🪨</span>
+          <h3 class="highlight-title">Forêt de Pierres</h3>
+          <p class="highlight-text">Des rochers de 30 mètres plantés dans la terre comme des couteaux. Site classé
+            UNESCO. Astuce : commencer par la fin du circuit pour éviter les foules de touristes chinois.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-1" style="color:var(--china)">
+          <span class="highlight-icon">⛰️</span>
+          <h3 class="highlight-title">Montagnes Cang Shan</h3>
+          <p class="highlight-text">De 1 900m à 4 100m... à pied ! Sous le regard des Chinoises en talons. Au sommet,
+            au-dessus des nuages, accompagnés par la BO du Roi Lion restée en tête 2 semaines.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-2" style="color:var(--china)">
+          <span class="highlight-icon">🦬</span>
+          <h3 class="highlight-title">Prairie des Yaks</h3>
+          <p class="highlight-text">À 3 800m, des yaks (des grosses vaches à cornes qui sentent la chèvre) paissent
+            devant des montagnes enneigées. Un paysage à planter sa maison.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-3" style="color:var(--china)">
+          <span class="highlight-icon">🏔️</span>
+          <h3 class="highlight-title">Shangri-La</h3>
+          <p class="highlight-text">3 200m d'altitude, deux cultures Han et Tibétaine, 0°C au petit matin et un moulin à
+            prière tibétain de 21 mètres que deux personnes ne peuvent même pas faire tourner.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-4" style="color:var(--china)">
+          <span class="highlight-icon">🛕</span>
+          <h3 class="highlight-title">Monastère Songzanlin</h3>
+          <p class="highlight-text">600 moines dans un village caché derrière les montagnes. Méditation groupée dans une
+            cacophonie d'instruments tibétains. Une bienveillance qui se dégage de chaque pierre.</p>
+        </div>
+        <div class="highlight-card reveal" style="color:var(--china)">
+          <span class="highlight-icon">🎒</span>
+          <h3 class="highlight-title">Le Trek Gratuit</h3>
+          <p class="highlight-text">Une habitante nous recrute pour le tournage d'une pub en échange d'un trek "facile"
+            qui s'avère être de l'escalade pure. Méditation au lac sacré au sommet. Magie.</p>
+        </div>
+      </div>
+
+      <div style="color:var(--china)">
+        <button class="article-toggle" onclick="toggleArticle(this)">
+          📖 Lire l'article complet : La Chine
+          <span class="toggle-arrow">▶</span>
+        </button>
+        <div class="article-full" style="color:var(--china)">
+          <div class="article-inner">
+            <h3>La région du Yunnan</h3>
+            <p>Le Yunnan (云南), littéralement « au sud des nuages » est une région aux portes de l'Asie du Sud-Est, aux
+              pieds de l'Himalaya. Une des plus riches en beauté de paysages et en diversité culturelle — la moitié des
+              minorités du pays y réside.</p>
+            <h3>Kunming</h3>
+            <p>Après 15 heures de voyage et 6 heures de décalage horaire, atterrissage à Kunming, « La Cité du Printemps
+              ». À peine 2 heures de bus : la Forêt de Pierres, classée UNESCO. Des rochers jusqu'à 30 mètres plantés
+              dans le sol, un décor de film, au milieu de groupes de touristes chinois qui ont, semble-t-il, des
+              problèmes d'audition récurrents 🙂</p>
+            <p>Au Green Lake Park à la nuit tombée : deux salles, deux ambiances. Les jeunes en crise d'épilepsie sur un
+              rock des années 2000, et les moins jeunes qui dansent une valse émouvante sur une douce musique chinoise.
+            </p>
+            <h3>Dali et les Montagnes Cang Shan</h3>
+            <p>Dali est à 1 900m d'altitude, le sommet des montagnes Cang Shan à 4 100m. Un téléphérique ? Pourquoi
+              faire ? Partis à pieds dans la forêt dense, perdus en comptant les marches à 13 617. Arrivés à la deuxième
+              étape du téléphérique, continuation sous les regards étonnés des Chinoises en talons. Au sommet,
+              accompagnés par la musique du Roi Lion, vue depuis au-dessus des nuages.</p>
+            <p>La Old Town de Dali, terre de l'ethnie Bai : des gâteaux aux fleurs délicieux, des rizières qui mènent au
+              lac Erhai, et de magnifiques araignées sur les chemins — elles n'attaquent pas, promis (ne les regardez
+              pas de travers non plus...).</p>
+            <h3>Lijiang</h3>
+            <p>Terre du peuple Naxi, 2 500m d'altitude. Minute culture : en Naxi, pierre + homme = « cailloux », pierre
+              + femme = « rocher ». Girl Power ! La Old Town entièrement classée UNESCO, une odeur de Yak grillé
+              mélangée au Durian — sacré mélange. Il FAUT goûter le bàbà, spécialité locale à base de farine, sésame,
+              noix et lard.</p>
+            <p>Le parc de l'Étang du Dragon Noir : un lac avec en toile de fond le mont Jade enneigé, des temples
+              flottants, une atmosphère hors du temps. La montagne Éléphant : on grimpe par les fesses de l'éléphant, on
+              redescend par la trompe...</p>
+            <h3>Shangri-La</h3>
+            <p>Quatre heures de bus et 1 800 virages plus tard (petite pensée aux malades en voiture), nous voilà à 3
+              200m. Sur la place centrale, une danse synchronisée émouvante réunit les habitants depuis des siècles.
+              Notre mascotte : un papy chinois au look extravagant, meilleur danseur de la troupe.</p>
+            <p>Le moulin à prière tibétain Zhuangjin Tong : 21 mètres de haut, 10 000 petits moulins en simultané. À
+              deux, on est incapables de le faire tourner — des habitants viennent à notre rescousse.</p>
+            <p>Un trek "gratuit" qui s'avère être un tournage de publicité, suivi d'une ascension qui relève parfois de
+              l'escalade pure, suivie d'une méditation de 30 minutes au bord d'un lac sacré. Chinese Mike Horn conclut
+              en nous montrant ses vidéos sur Youku, le YouTube chinois.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="section-divider">
+    <div class="divider-road"></div>
+    <div class="divider-van">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+        <circle cx="580" cy="220" r="110" fill="#F4A261" opacity="0.15" />
+        <circle cx="580" cy="220" r="75" fill="#E9C46A" opacity="0.3" />
+        <ellipse cx="400" cy="492" rx="280" ry="8" fill="#000" opacity="0.15" />
+        <polygon points="210,165 480,225 210,225" fill="#D4C5B0" />
+        <path d="M190 160L500 220C510 222 510 225 500 225L190 168C180 166 180 162 190 160Z" fill="#FDFBF7" />
+        <path d="M150 330L165 240C170 230 180 225 190 225L540 225C560 225 570 230 580 245L615 330Z" fill="#FDFBF7" />
+        <path
+          d="M150 330L615 330C625 350 650 355 655 380L655 420C655 440 645 450 625 450L165 450C155 450 150 440 150 420Z"
+          fill="#2A9D8F" />
+        <path d="M150 330L615 330L617 336L150 336Z" fill="#E9C46A" />
+        <path d="M150 339L618 339L620 342L150 342Z" fill="#E76F51" />
+        <path d="M195 450C195 385 315 385 315 450Z" fill="#1A1A1A" />
+        <path d="M485 450C485 385 605 385 605 450Z" fill="#1A1A1A" />
+        <circle cx="255" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="255" cy="450" r="24" fill="#EEE" />
+        <circle cx="255" cy="450" r="14" fill="#999" />
+        <circle cx="545" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="545" cy="450" r="24" fill="#EEE" />
+        <circle cx="545" cy="450" r="14" fill="#999" />
+        <rect x="180" y="245" width="80" height="65" rx="6" fill="#1C2833" />
+        <rect x="275" y="245" width="100" height="65" rx="6" fill="#1C2833" />
+        <rect x="390" y="245" width="90" height="65" rx="6" fill="#1C2833" />
+        <path d="M495 245L565 245C570 245 575 248 578 253L602 305C605 310 600 310 595 310L495 310Z" fill="#1C2833" />
+        <path d="M655 330C685 330 685 390 655 390Z" fill="#E76F51" />
+        <path d="M655 345C670 345 670 375 655 375Z" fill="#FDFBF7" />
+        <path d="M152 350L145 350C142 350 142 365 145 365L150 365Z" fill="#E63946" />
+        <path d="M152 365L145 365C142 365 142 370 145 370L150 370Z" fill="#F4A261" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- ===================== INDONESIE ===================== -->
+  <section class="destination dest-indonesie" id="dest-1">
+    <div class="dest-header">
+      <div class="dest-number">02</div>
+      <div class="dest-stamp reveal">🌺</div>
+      <p class="dest-dates reveal reveal-delay-1">Octobre – Novembre 2019 · Bali & Lombok</p>
+      <h2 class="dest-country reveal reveal-delay-2">Indonésie</h2>
+      <p class="dest-tagline reveal reveal-delay-3">L'île des Dieux — volcans, rizières et temples</p>
+      <span class="dest-km reveal reveal-delay-4">✈️ 1 euro = 15 740 IDR</span>
+    </div>
+
+    <div class="dest-content">
+      <div class="postcard reveal" style="color:var(--indonesia)">
+        <span class="postcard-stamp">🌴</span>
+        <p class="postcard-text">« Des Canang Sari déposés trois fois par jour devant chaque porte, des habitants qui
+          vous arrêtent dans la rue uniquement pour sourire et dire bonjour (rien à vendre !), et un volcan gravé à 3h
+          du matin pour voir le soleil se lever... Bali, c'est magique. »</p>
+        <p class="postcard-from">— Depuis le sommet du mont Batur, foie rempli d'Arak</p>
+      </div>
+
+      <div class="highlights-grid">
+        <div class="highlight-card reveal" style="color:var(--indonesia)">
+          <span class="highlight-icon">🌋</span>
+          <h3 class="highlight-title">Mont Batur à l'aube</h3>
+          <p class="highlight-text">Départ 3h du matin avec une torche et un guide. Au sommet, les étoiles laissent
+            place à un ciel qui s'enflamme. Le mont Agung se détache dans l'orange. Roche chaude. Silence. Sublime.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-1" style="color:var(--indonesia)">
+          <span class="highlight-icon">🐒</span>
+          <h3 class="highlight-title">Temple Uluwatu</h3>
+          <p class="highlight-text">Des singes qui volent les iPhones et défont les lunettes de leurs montures EN
+            REGARDANT leur victime dans les yeux. Conseils d'usage : sac zippé obligatoire.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-2" style="color:var(--indonesia)">
+          <span class="highlight-icon">🌿</span>
+          <h3 class="highlight-title">Rizières de Tegallalang</h3>
+          <p class="highlight-text">8 km à pied sous un soleil de plomb pour arriver exactement à 18h, la golden hour.
+            Le résultat : des photos qui semblent retouchées mais ne le sont pas. La nature joue avec Photoshop.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-3" style="color:var(--indonesia)">
+          <span class="highlight-icon">🐠</span>
+          <h3 class="highlight-title">Gili Trawangan</h3>
+          <p class="highlight-text">Pas de voiture, pas de moto : vélo ou calèche seulement. 4h de snorkeling avec
+            tortues et poissons multicolores entre Gili Air et Gili Meno. Back to 70's.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-4" style="color:var(--indonesia)">
+          <span class="highlight-icon">🌾</span>
+          <h3 class="highlight-title">Rizières de Jatiluwih</h3>
+          <p class="highlight-text">Site UNESCO. Un paysage de science-fiction : immensité de rizières à terrasses d'un
+            vert surréaliste avec en fond de toile, un volcan. À mi-chemin : noix de coco fraîche obligatoire.</p>
+        </div>
+        <div class="highlight-card reveal" style="color:var(--indonesia)">
+          <span class="highlight-icon">💧</span>
+          <h3 class="highlight-title">Cascade de Tegenungan</h3>
+          <p class="highlight-text">Le rêve : se baigner dans une cascade. Au-dessus : 4 piscines à débordement et 3
+            clubs. Deux salles, deux ambiances. Continuez le ruisseau au-delà : vous serez seuls, et c'est magnifique.
+          </p>
+        </div>
+      </div>
+
+      <div style="color:var(--indonesia)">
+        <button class="article-toggle" onclick="toggleArticle(this)">
+          📖 Lire l'article complet : L'Indonésie
+          <span class="toggle-arrow">▶</span>
+        </button>
+        <div class="article-full" style="color:var(--indonesia)">
+          <div class="article-inner">
+            <h3>Bali, l'Île des Dieux</h3>
+            <p>L'Indonésie est composée de 18 000 îles. Nous nous sommes concentrés sur Bali — la plus dense en variété
+              de paysages : plages, volcans, rizières, lacs magnifiques. Et la moins accessible pour les moustiques
+              tigres 🙂</p>
+            <h3>Jimbaran et ses alentours</h3>
+            <p>Sortie de Chine compliquée (aéroport "fermé", deux confiscations de passeport...), atterrissage en
+              short/tong : trop bien. Premier plateau de fruits de mer les pieds dans le sable, les palmiers à perte de
+              vue. Le bonheur.</p>
+            <p>Les Canang Sari : trois fois par jour, des petits paniers de nourriture, fleurs, encens et cigarettes
+              (!?!) déposés devant chaque porte pour nourrir les défunts et apaiser les démons. Un bonheur contagieux
+              qui envahit tout le quartier.</p>
+            <h3>Temple Uluwatu et les singes voleurs</h3>
+            <p>Au bout du sentier qui longe une falaise, des singes ont développé une technique de vol furtif
+              redoutable. iPhone, lunettes, sacs... Ils défont les montures en regardant leur victime droit dans les
+              yeux. Conseil : sac zippé obligatoire. Ils ne savent a priori pas encore ouvrir les fermetures.</p>
+            <h3>Ubud — Welcome to the Jungle</h3>
+            <p>La randonnée Campuhan : une crête entre jungle et rizières, une lumière sublime, seuls dans ce paysage
+              étonnant. La Monkey Forest et sa cérémonie annuelle en l'honneur des animaux — on était le jour J, une
+              fois de plus, on est chanceux.</p>
+            <p>La cascade de Tegenungan : notre rêve de nous baigner sous une cascade... Réalisé ! On était nombreux,
+              certes, mais continuez le ruisseau au-delà de la foule : seuls, dans une jungle humaine, c'est beau.
+              Retour à pied en 3h de marche à travers des villages où le temps semble arrêté.</p>
+            <h3>Mont Batur — l'ascension mythique</h3>
+            <p>Soirée de bienvenue chez Edy au Volcano Hostel : poisson pêché le matin même, soirée inoubliable avec
+              l'Arak (alcool local), les frères d'Edy et sa femme. Réveil 3h du matin. Café. Torche de guide. La
+              randonnée dans la nuit noire.</p>
+            <p>Au bout d'une heure : "on est arrivés ?" Non, c'est le pied du mont Batur. L'ascension véritable
+              commence. Au sommet, la roche est chaude, le mont Agung se détache dans le ciel orangé, le lac en
+              contre-bas, les étoiles laissent place au soleil. TOP TOP TOP.</p>
+            <h3>Gili Trawangan</h3>
+            <p>Pas de voiture, pas de moto. Vélo ou calèche. Les poumons au paradis. 4 heures de snorkeling avec tortues
+              et Dory la famille amnésique entre Gili Air et Gili Meno. Le coucher de soleil depuis le "view point"
+              secret d'un habitant : inattendu et magnifique.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider">
+    <div class="divider-road"></div>
+    <div class="divider-van" style="animation-delay:-1s"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+        <circle cx="580" cy="220" r="110" fill="#F4A261" opacity="0.15" />
+        <circle cx="580" cy="220" r="75" fill="#E9C46A" opacity="0.3" />
+        <ellipse cx="400" cy="492" rx="280" ry="8" fill="#000" opacity="0.15" />
+        <polygon points="210,165 480,225 210,225" fill="#D4C5B0" />
+        <path d="M190 160L500 220C510 222 510 225 500 225L190 168C180 166 180 162 190 160Z" fill="#FDFBF7" />
+        <path d="M150 330L165 240C170 230 180 225 190 225L540 225C560 225 570 230 580 245L615 330Z" fill="#FDFBF7" />
+        <path
+          d="M150 330L615 330C625 350 650 355 655 380L655 420C655 440 645 450 625 450L165 450C155 450 150 440 150 420Z"
+          fill="#2A9D8F" />
+        <path d="M150 330L615 330L617 336L150 336Z" fill="#E9C46A" />
+        <path d="M150 339L618 339L620 342L150 342Z" fill="#E76F51" />
+        <path d="M195 450C195 385 315 385 315 450Z" fill="#1A1A1A" />
+        <path d="M485 450C485 385 605 385 605 450Z" fill="#1A1A1A" />
+        <circle cx="255" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="255" cy="450" r="24" fill="#EEE" />
+        <circle cx="255" cy="450" r="14" fill="#999" />
+        <circle cx="545" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="545" cy="450" r="24" fill="#EEE" />
+        <circle cx="545" cy="450" r="14" fill="#999" />
+        <rect x="180" y="245" width="80" height="65" rx="6" fill="#1C2833" />
+        <rect x="275" y="245" width="100" height="65" rx="6" fill="#1C2833" />
+        <rect x="390" y="245" width="90" height="65" rx="6" fill="#1C2833" />
+        <path d="M495 245L565 245C570 245 575 248 578 253L602 305C605 310 600 310 595 310L495 310Z" fill="#1C2833" />
+        <path d="M655 330C685 330 685 390 655 390Z" fill="#E76F51" />
+        <path d="M655 345C670 345 670 375 655 375Z" fill="#FDFBF7" />
+        <path d="M152 350L145 350C142 350 142 365 145 365L150 365Z" fill="#E63946" />
+        <path d="M152 365L145 365C142 365 142 370 145 370L150 370Z" fill="#F4A261" />
+      </svg></div>
+  </div>
+
+  <!-- ===================== AUSTRALIE ===================== -->
+  <section class="destination dest-australie" id="dest-2">
+    <div class="dest-header">
+      <div class="dest-number">03</div>
+      <div class="dest-stamp reveal">🦘</div>
+      <p class="dest-dates reveal reveal-delay-1">Novembre – Décembre 2019 · 3 200 km</p>
+      <h2 class="dest-country reveal reveal-delay-2">Australie</h2>
+      <p class="dest-tagline reveal reveal-delay-3">Raoul notre van — 406 000 km et quelques fumées blanches</p>
+      <span class="dest-km reveal reveal-delay-4">🚐 Brisbane → Melbourne</span>
+    </div>
+
+    <div class="dest-content">
+      <div class="postcard reveal" style="color:var(--australia)">
+        <span class="postcard-stamp">🦜</span>
+        <p class="postcard-text">« Raoul, notre van des années 70, nous en a fait voir de toutes les couleurs. La belle
+          fumée blanche qui se dégageait de son capot sur les faux plats montants, le camping gratuit avec les vaches
+          comme voisines... et les pingouins qui passaient sous nos pieds au coucher du soleil. »</p>
+        <p class="postcard-from">— Sur la côte Est, quelque part entre Brisbane et Melbourne</p>
+      </div>
+
+      <div class="highlights-grid">
+        <div class="highlight-card reveal" style="color:var(--australia)">
+          <span class="highlight-icon">🐨</span>
+          <h3 class="highlight-title">L'Hôpital des Koalas</h3>
+          <p class="highlight-text">« Les incendies de ce mois ont provoqué la mort de plus de 2 000 koalas. Cela marque
+            le point de non-retour vers l'extinction. » — le vétérinaire, les larmes aux yeux. Un moment qui marque à
+            vie.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-1" style="color:var(--australia)">
+          <span class="highlight-icon">🐧</span>
+          <h3 class="highlight-title">Les Pingouins de St Kilda</h3>
+          <p class="highlight-text">Attente au coucher du soleil au bout de la jetée. Soudain, des dizaines de pingouins
+            arrivent en courant maladroitement. Certains passent sous nos pieds pour rentrer chez eux dans les rochers.
+          </p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-2" style="color:var(--australia)">
+          <span class="highlight-icon">🌊</span>
+          <h3 class="highlight-title">Milford Sounds</h3>
+          <p class="highlight-text">On découvre la croisière au dernier moment. Agence Jucy : -50% de remise, dernier
+            grand bateau, départ dans 15 minutes. La vie est bien faite. Le capitaine nous passe SOUS une cascade. On
+            est trempés et comblés.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-3" style="color:var(--australia)">
+          <span class="highlight-icon">🏟️</span>
+          <h3 class="highlight-title">Sydney & l'Opéra</h3>
+          <p class="highlight-text">D'un jardin tropical, on découvre un chef-d'œuvre de modernité. Plus on s'approche,
+            plus on réalise la complexité et la taille. Le Père-Noël parle bien anglais et un sapin s'illumine de 1 000
+            couleurs.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-4" style="color:var(--australia)">
+          <span class="highlight-icon">🐊</span>
+          <h3 class="highlight-title">La réserve Featherdale</h3>
+          <p class="highlight-text">Kangourous, wallabies, wombats (petit ours à dents de lapin), koalas perchés, dingos
+            et même un perroquet qui répète ce qu'on dit en français sans accent. L'Australie est dingue.</p>
+        </div>
+        <div class="highlight-card reveal" style="color:var(--australia)">
+          <span class="highlight-icon">🏄</span>
+          <h3 class="highlight-title">Byron Bay</h3>
+          <p class="highlight-text">La ville la plus à l'Est d'Australie. Des surfeurs planche sous le bras traversent
+            la route, les Byronais marchent pieds nus sur les trottoirs. Cape Byron Track jusqu'au phare qui "éclaire le
+            Chili" en face.</p>
+        </div>
+      </div>
+
+      <div style="color:var(--australia)">
+        <button class="article-toggle" onclick="toggleArticle(this)">
+          📖 Lire l'article complet : L'Australie
+          <span class="toggle-arrow">▶</span>
+        </button>
+        <div class="article-full" style="color:var(--australia)">
+          <div class="article-inner">
+            <h3>Raoul notre Van qui roule</h3>
+            <p>Fort de ses 406 000 km, Raoul nous en a fait voir de toutes les couleurs. Notamment cette belle fumée
+              blanche qui se dégageait de son capot dès qu'il devait affronter un faux plat montant. Première expérience
+              de Van pour nous deux, un goût de liberté dont nous sommes devenus, en quelques jours seulement, accros.
+            </p>
+            <h3>Brisbane et ses surprises</h3>
+            <p>Cinq impressions à l'atterrissage : tout le monde est super sympa ; on ne comprend rien, ils parlent
+              vraiment anglais ? ; des gratte-ciels au lieu des cocotiers ; un métro propre (ça existe !) ; et un soleil
+              plus chaud qu'ailleurs — on est près du trou de la couche d'ozone.</p>
+            <p>Dimanche au Lagoon : une piscine à débordement avec vue sur le centre-ville. Les enfants s'arrosent, les
+              ados bronzent, les parents font cuire des saucisses sur les BBQ publics. Tout est gratuit. On n'en revient
+              pas.</p>
+            <h3>Into the Fire</h3>
+            <p>Un réveil dans la fumée des incendies. Des cendres qui tombent du ciel. Une ville dans un brouillard
+              suffocant. Un disque blanc dans le ciel orange. Une réalité qui nous rappelle que l'Australie s'embrase,
+              que nous en sommes responsables, et qu'un Koala ne court pas assez longtemps pour fuir.</p>
+            <h3>Sydney</h3>
+            <p>L'Opéra dans toute sa splendeur, au milieu d'un jardin tropical. Le Circular Quay avec ses bars, les
+              bouchons de champagne qui sautent, le Harbour Bridge traversé à pied de nuit. Le quartier historique The
+              Rocks, où tout le monde se mélange en belle harmonie. Un sapin de Noël qui s'illumine de 1 000 couleurs au
+              son de Last Christmas.</p>
+            <h3>Melbourne et ses alentours</h3>
+            <p>La nuit au parc national Great Otway au pied d'immenses arbres, bercés par une cascade. Beauchamp Falls
+              au lever du soleil, seuls devant une cascade dans une clairière. Les Douze Apôtres (en réalité neuf
+              formations rocheuses — les anglais...) sur la Great Ocean Road.</p>
+            <p>Phillip Island et ses milliers de pingouins qui courent maladroitement vers nous au coucher du soleil,
+              passant sous nos pieds pour rentrer chez eux. La prison de Melbourne avec un vrai gardien qui nous pousse
+              contre les murs, nous fouille et nous enferme dans une cellule plongée dans le noir.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider">
+    <div class="divider-road"></div>
+    <div class="divider-van" style="animation-delay:-2s"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+        <circle cx="580" cy="220" r="110" fill="#F4A261" opacity="0.15" />
+        <circle cx="580" cy="220" r="75" fill="#E9C46A" opacity="0.3" />
+        <ellipse cx="400" cy="492" rx="280" ry="8" fill="#000" opacity="0.15" />
+        <polygon points="210,165 480,225 210,225" fill="#D4C5B0" />
+        <path d="M190 160L500 220C510 222 510 225 500 225L190 168C180 166 180 162 190 160Z" fill="#FDFBF7" />
+        <path d="M150 330L165 240C170 230 180 225 190 225L540 225C560 225 570 230 580 245L615 330Z" fill="#FDFBF7" />
+        <path
+          d="M150 330L615 330C625 350 650 355 655 380L655 420C655 440 645 450 625 450L165 450C155 450 150 440 150 420Z"
+          fill="#2A9D8F" />
+        <path d="M150 330L615 330L617 336L150 336Z" fill="#E9C46A" />
+        <path d="M150 339L618 339L620 342L150 342Z" fill="#E76F51" />
+        <path d="M195 450C195 385 315 385 315 450Z" fill="#1A1A1A" />
+        <path d="M485 450C485 385 605 385 605 450Z" fill="#1A1A1A" />
+        <circle cx="255" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="255" cy="450" r="24" fill="#EEE" />
+        <circle cx="255" cy="450" r="14" fill="#999" />
+        <circle cx="545" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="545" cy="450" r="24" fill="#EEE" />
+        <circle cx="545" cy="450" r="14" fill="#999" />
+        <rect x="180" y="245" width="80" height="65" rx="6" fill="#1C2833" />
+        <rect x="275" y="245" width="100" height="65" rx="6" fill="#1C2833" />
+        <rect x="390" y="245" width="90" height="65" rx="6" fill="#1C2833" />
+        <path d="M495 245L565 245C570 245 575 248 578 253L602 305C605 310 600 310 595 310L495 310Z" fill="#1C2833" />
+        <path d="M655 330C685 330 685 390 655 390Z" fill="#E76F51" />
+        <path d="M655 345C670 345 670 375 655 375Z" fill="#FDFBF7" />
+        <path d="M152 350L145 350C142 350 142 365 145 365L150 365Z" fill="#E63946" />
+        <path d="M152 365L145 365C142 365 142 370 145 370L150 370Z" fill="#F4A261" />
+      </svg></div>
+  </div>
+
+  <!-- ===================== NOUVELLE-ZÉLANDE ===================== -->
+  <section class="destination dest-nz" id="dest-3">
+    <div class="dest-header">
+      <div class="dest-number">04</div>
+      <div class="dest-stamp reveal">🥝</div>
+      <p class="dest-dates reveal reveal-delay-1">Décembre 2019 – Janvier 2020 · 4 168 km</p>
+      <h2 class="dest-country reveal reveal-delay-2">Nouvelle-Zélande</h2>
+      <p class="dest-tagline reveal reveal-delay-3">Rollo le van vert & les mondes fantastiques qui existent vraiment
+      </p>
+      <span class="dest-km reveal reveal-delay-4">🚐 Queenstown → Auckland</span>
+    </div>
+
+    <div class="dest-content">
+      <div class="postcard reveal" style="color:var(--nz)">
+        <span class="postcard-stamp">🏔️</span>
+        <p class="postcard-text">« On a arrêté de compter les "Waouh" — ils étaient devenus trop nombreux. C'est comme
+          si la nature de cette région du monde avait joué avec Photoshop. La Nouvelle-Zélande, c'est le pays qui prouve
+          que les paysages de films fantastiques existent vraiment sur Terre. »</p>
+        <p class="postcard-from">— Entre le Mordor et Hobbiton, quelque part sur l'île du Nord</p>
+      </div>
+
+      <div class="highlights-grid">
+        <div class="highlight-card reveal" style="color:var(--nz)">
+          <span class="highlight-icon">⚔️</span>
+          <h3 class="highlight-title">Hobbiton</h3>
+          <p class="highlight-text">44 trous de Hobbit, un arbre artificiel de 20m, des jardins avec de vrais légumes.
+            L'auberge du Dragon Green Dragon sert une bière au goût décrit par Tolkien lui-même. Magique, tout
+            simplement magique.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-1" style="color:var(--nz)">
+          <span class="highlight-icon">🏔️</span>
+          <h3 class="highlight-title">Mont Cook et ses randonnées</h3>
+          <p class="highlight-text">Hooker Valley Track : 3 ponts suspendus ("Max load: 0 people"), des torrents d'eau
+            turquoise, le Hooker Lake avec des icebergs. Les premiers de notre vie. Un glacier qui donne naissance à
+            deux lacs.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-2" style="color:var(--nz)">
+          <span class="highlight-icon">🌊</span>
+          <h3 class="highlight-title">Milford Sound</h3>
+          <p class="highlight-text">Découverte de la croisière au dernier moment. On s'arrête 46 fois sur la route en
+            7h. Le capitaine passe le bateau SOUS une cascade. On est trempés jusqu'aux os et comblés de bonheur.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-3" style="color:var(--nz)">
+          <span class="highlight-icon">🌋</span>
+          <h3 class="highlight-title">Le Mordor existe</h3>
+          <p class="highlight-text">Le mont Tongariro, décor du Mordor de Tolkien. Roche de lave récente (dernière
+            éruption : 2012). On ne passe pas la nuit. En bas, la Tawhai Fall où Gollum a trouvé l'Anneau. C'est réel,
+            c'est là.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-4" style="color:var(--nz)">
+          <span class="highlight-icon">🦁</span>
+          <h3 class="highlight-title">Lions de mer et pingouins</h3>
+          <p class="highlight-text">Des dizaines de lions de mer qui dorment sur des roches de plage, bâillent en nous
+            voyant et se rendorment. Puis le lendemain, des pingouins qui courent maladroitement sur la jetée de St
+            Kilda. La vie est belle.</p>
+        </div>
+        <div class="highlight-card reveal" style="color:var(--nz)">
+          <span class="highlight-icon">🎆</span>
+          <h3 class="highlight-title">Réveillon à Wellington</h3>
+          <p class="highlight-text">Notre premier décompte de Nouvelle Année en anglais ! Le vent qui souffle entre les
+            deux îles, les passages piétons qui font le Haka, un feu d'artifice tiré depuis le large. Bonne année 2020
+            🥂</p>
+        </div>
+      </div>
+
+      <div style="color:var(--nz)">
+        <button class="article-toggle" onclick="toggleArticle(this)">
+          📖 Lire l'article complet : La Nouvelle-Zélande
+          <span class="toggle-arrow">▶</span>
+        </button>
+        <div class="article-full" style="color:var(--nz)">
+          <div class="article-inner">
+            <h3>Rollo le Van</h3>
+            <p>220 000 kilomètres au compteur ! Un petit jeune comparé à Raoul. D'un vert éclatant, Rollo se fond dans
+              la nature néo-zélandaise et MIRACLE : il grimpe les côtes sans fumée. Troisième "Waouh".</p>
+            <h3>Queenstown et Paradise</h3>
+            <p>Premier atterrissage entre deux montagnes enneigées. Une station d'hiver... en été. Le lac Wakatipu, les
+              chalets, les queenstownois en combinaison de ski. Le village Paradise, décor du Seigneur des Anneaux et de
+              Narnia. On comprend immédiatement pourquoi Peter Jackson a choisi ce pays.</p>
+            <h3>Milford Sound</h3>
+            <p>46 arrêts sur la route en 7 heures de trajet. Des plaines de fleurs violettes, des torrents turquoises,
+              des cascades à chaque flanc de montagne. On arrive sur un impasse, on gare le van, on marche. Une famille
+              de Canadiens demande l'heure de notre croisière... quelle croisière ?</p>
+            <p>Agence Jucy : 50% de remise, dernier grand bateau, départ dans 15 minutes. On embarque à une dizaine dans
+              un énorme bateau. Des montagnes sortent de l'eau, des torrents plongent depuis leurs sommets. Et le
+              capitaine nous passe sous une cascade. On est trempés et comblés.</p>
+            <h3>Christchurch, la maudite</h3>
+            <p>Des ruelles vides, des maisons abandonnées aux vitres empoussiérées, des bâtiments neufs qui contrastent
+              avec tout le reste. Un air gris, un malaise qu'on ne comprend pas. Puis on lit le panneau devant la
+              cathédrale à moitié effondrée : séisme 7,0 en 2010, 6,3 en 2011, 6,0 en 2011. Attaque terroriste en 2019.
+              Christchurch a tout perdu plusieurs fois.</p>
+            <p>Noël dans le van : nappe à damier rouge et blanc, pâté, camembert danois, salami, vin de Nouvelle-Zélande
+              et gâteau au chocolat. 25°C dehors. Des sapins dans la terre. La famille qui manque. Un repas qui fait
+              extrêmement du bien.</p>
+            <h3>Hobbiton</h3>
+            <p>En 1998, Peter Jackson survole les terres néo-zélandaises et rencontre Alexander, le fermier. 44 trous de
+              Hobbit, un arbre artificiel de 20 mètres, un pont, un moulin, un lac artificiel. Après la trilogie, tout
+              est détruit. Puis Le Hobbit : Alexander conditionne la location par un droit d'exploitation exclusif. Il
+              devient l'un des hommes les plus riches du pays.</p>
+            <p>L'entrée nous transporte instantanément dans le film. Des vrais légumes dans les jardins, des trous
+              truffés de détails, l'auberge du Dragon où on sirote une bière brassée sur place au goût décrit par
+              Tolkien. Magique.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider">
+    <div class="divider-road"></div>
+    <div class="divider-van"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+        <circle cx="580" cy="220" r="110" fill="#F4A261" opacity="0.15" />
+        <circle cx="580" cy="220" r="75" fill="#E9C46A" opacity="0.3" />
+        <ellipse cx="400" cy="492" rx="280" ry="8" fill="#000" opacity="0.15" />
+        <polygon points="210,165 480,225 210,225" fill="#D4C5B0" />
+        <path d="M190 160L500 220C510 222 510 225 500 225L190 168C180 166 180 162 190 160Z" fill="#FDFBF7" />
+        <path d="M150 330L165 240C170 230 180 225 190 225L540 225C560 225 570 230 580 245L615 330Z" fill="#FDFBF7" />
+        <path
+          d="M150 330L615 330C625 350 650 355 655 380L655 420C655 440 645 450 625 450L165 450C155 450 150 440 150 420Z"
+          fill="#2A9D8F" />
+        <path d="M150 330L615 330L617 336L150 336Z" fill="#E9C46A" />
+        <path d="M150 339L618 339L620 342L150 342Z" fill="#E76F51" />
+        <path d="M195 450C195 385 315 385 315 450Z" fill="#1A1A1A" />
+        <path d="M485 450C485 385 605 385 605 450Z" fill="#1A1A1A" />
+        <circle cx="255" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="255" cy="450" r="24" fill="#EEE" />
+        <circle cx="255" cy="450" r="14" fill="#999" />
+        <circle cx="545" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="545" cy="450" r="24" fill="#EEE" />
+        <circle cx="545" cy="450" r="14" fill="#999" />
+        <rect x="180" y="245" width="80" height="65" rx="6" fill="#1C2833" />
+        <rect x="275" y="245" width="100" height="65" rx="6" fill="#1C2833" />
+        <rect x="390" y="245" width="90" height="65" rx="6" fill="#1C2833" />
+        <path d="M495 245L565 245C570 245 575 248 578 253L602 305C605 310 600 310 595 310L495 310Z" fill="#1C2833" />
+        <path d="M655 330C685 330 685 390 655 390Z" fill="#E76F51" />
+        <path d="M655 345C670 345 670 375 655 375Z" fill="#FDFBF7" />
+        <path d="M152 350L145 350C142 350 142 365 145 365L150 365Z" fill="#E63946" />
+        <path d="M152 365L145 365C142 365 142 370 145 370L150 370Z" fill="#F4A261" />
+      </svg></div>
+  </div>
+
+  <!-- ===================== ÎLE DE PÂQUES ===================== -->
+  <section class="destination dest-easterisland" id="dest-4">
+    <div class="dest-header">
+      <div class="dest-number">05</div>
+      <div class="dest-stamp reveal">🗿</div>
+      <p class="dest-dates reveal reveal-delay-1">21 – 25 Janvier 2020 · 116 km</p>
+      <h2 class="dest-country reveal reveal-delay-2">Île de Pâques</h2>
+      <p class="dest-tagline reveal reveal-delay-3">Rapa Nui — le nombril du monde à 3 700 km de tout</p>
+      <span class="dest-km reveal reveal-delay-4">✈️ Air Tahiti · via Papeete</span>
+    </div>
+
+    <div class="dest-content">
+      <div class="postcard reveal" style="color:var(--easterisland)">
+        <span class="postcard-stamp">🌊</span>
+        <p class="postcard-text">« Une piste d'atterrissage terreuse, des toits de chaume. Un aéroport qui ne semble pas
+          en être un. Une seule ville, une seule rue, bordée des deux côtés par les sourires d'habitants profondément
+          heureux. Internet a disparu. Le ceviche de thon à peine sorti des filets. Le bonheur absolu. »</p>
+        <p class="postcard-from">— Dans la tente de Nelson, au pied du volcan, Île de Pâques</p>
+      </div>
+
+      <div class="highlights-grid">
+        <div class="highlight-card reveal" style="color:var(--easterisland)">
+          <span class="highlight-icon">🗿</span>
+          <h3 class="highlight-title">Les Moaïs mystérieux</h3>
+          <p class="highlight-text">300 Moaïs. Entre 4 et 10 mètres. Des yeux en os de requin, des pupilles en corail.
+            Tous tournés vers l'intérieur de l'île. Une coiffe de pierre rouge de 1,5 tonne. Une statue inachevée de 24m
+            et 150 tonnes dans le cratère.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-1" style="color:var(--easterisland)">
+          <span class="highlight-icon">🌋</span>
+          <h3 class="highlight-title">Ascension du Volcan</h3>
+          <p class="highlight-text">Le soleil se lève à 7h52 — pas besoin de se lever en pleine nuit. Ascension en
+            lacets sous les regards étonnés des vaches (on se sent jugés...). Sommet : cratère cylindrique parfait, vue
+            sur l'océan infini tout autour.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-2" style="color:var(--easterisland)">
+          <span class="highlight-icon">🚲</span>
+          <h3 class="highlight-title">Tour de l'île en VTT</h3>
+          <p class="highlight-text">Pédale à vive allure sur la côte Est au lever du soleil. Les 20 premiers kilomètres
+            dans un univers chargé de mystère. Les 20 suivants : le constat que la selle est moins agréable qu'au début
+            🙂</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-3" style="color:var(--easterisland)">
+          <span class="highlight-icon">🌅</span>
+          <h3 class="highlight-title">Coucher de soleil mythique</h3>
+          <p class="highlight-text">Les Moaïs qui semblent bouder l'océan, silhouettes noires dans un ciel enflammé. Un
+            des couchers de soleil les plus photographiés du monde, et on comprend pourquoi.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-4" style="color:var(--easterisland)">
+          <span class="highlight-icon">⚠️</span>
+          <h3 class="highlight-title">La Dengue en bonus</h3>
+          <p class="highlight-text">Distribution générale d'anti-moustiques à l'arrivée. L'île est infestée. Virus
+            potentiellement mortel, aucun traitement. "Wait and see" devient notre nouvelle philosophie de voyage.</p>
+        </div>
+        <div class="highlight-card reveal" style="color:var(--easterisland)">
+          <span class="highlight-icon">🌍</span>
+          <h3 class="highlight-title">L'Écocide comme miroir</h3>
+          <p class="highlight-text">La construction des Moaïs a conduit à la déforestation totale. Sans arbres, les
+            oiseaux disparurent, puis les famines, les guerres, la fin d'une civilisation. Des événements qui nous
+            rappellent un peu trop ce qui se passe en 2020...</p>
+        </div>
+      </div>
+
+      <div style="color:var(--easterisland)">
+        <button class="article-toggle" onclick="toggleArticle(this)">
+          📖 Lire l'article complet : L'Île de Pâques
+          <span class="toggle-arrow">▶</span>
+        </button>
+        <div class="article-full" style="color:var(--easterisland)">
+          <div class="article-inner">
+            <h3>Rapa Nui — le bout du monde</h3>
+            <p>L'île de Pâques est l'endroit le plus isolé du monde. Ses plus proches voisins sont à 3 700 km.
+              Considérée comme le nombril du Monde. Découverte en 500 ap. J.-C. par le chef de clan Hotu Matua qui
+              envoya sept pirogues chercher de nouvelles terres. Le 5 avril 1722, l'amiral hollandais Roggeveen lui
+              donne son nom.</p>
+            <h3>L'arrivée</h3>
+            <p>Douze heures de voyage depuis la Nouvelle-Zélande. Embarquement sur Air Tahiti, distribution de fleurs et
+              de Gin Tonic — le vol le plus agréable de notre vie. Escale à Papeete accueillis par un Tahitien qui
+              chante avec un micro et des colliers de fleurs en pleine nuit. On arrive la "veille de notre départ"
+              (décalage horaire) — qui a dit que le voyage dans le passé était impossible ?</p>
+            <p>Piste d'atterrissage terreuse. Toits de chaume. Une pancarte "Aeropuerto" qui semble là pour convaincre.
+              Distribution générale d'anti-moustiques contre la dengue — virus mortel, aucun traitement, wait and see.
+            </p>
+            <h3>La vie à Rapa Nui</h3>
+            <p>Nelson notre hôte nous accueille dans son jardin. Une tente Quechua à vingt minutes du reste du monde, au
+              pied du volcan. 17°C, une seule rue, des habitants profondément heureux. Internet a disparu. Le ceviche de
+              thon sorti des filets fait du bien.</p>
+            <h3>Les Moaïs — une minute culture</h3>
+            <p>300 Moaïs, beaucoup renversés lors des guerres tribales. Faits de basalte du volcan Rano Raraku. Yeux en
+              os (requins, vertébrés), pupilles en corail incrusté. Entre 4 et 10 mètres. Une coiffe rouge de 1,5 tonne
+              chacun. Dans le cratère : des dizaines d'inachevés, dont un de 24m et 150 tonnes.</p>
+            <p>Tous tournés vers l'intérieur, le dos à la mer, le regard vers le ciel. Leur rôle reste mystérieux —
+              idoles protectrices ou rituels pour les défunts.</p>
+            <h3>L'ironie tragique</h3>
+            <p>Ironie du sort : la construction de canoës pour transporter les Moaïs a conduit à la déforestation totale
+              de l'île. Privés de leurs habitats, les oiseaux et animaux disparurent. Famines, épidémies, guerres
+              tribales. D'une population initiale de 4 000, une centaine survécut. Des événements qui nous rappellent un
+              peu trop ce qui se passe en 2020.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider">
+    <div class="divider-road"></div>
+    <div class="divider-van" style="animation-delay:-0.5s"><svg xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 800 600">
+        <circle cx="580" cy="220" r="110" fill="#F4A261" opacity="0.15" />
+        <circle cx="580" cy="220" r="75" fill="#E9C46A" opacity="0.3" />
+        <ellipse cx="400" cy="492" rx="280" ry="8" fill="#000" opacity="0.15" />
+        <polygon points="210,165 480,225 210,225" fill="#D4C5B0" />
+        <path d="M190 160L500 220C510 222 510 225 500 225L190 168C180 166 180 162 190 160Z" fill="#FDFBF7" />
+        <path d="M150 330L165 240C170 230 180 225 190 225L540 225C560 225 570 230 580 245L615 330Z" fill="#FDFBF7" />
+        <path
+          d="M150 330L615 330C625 350 650 355 655 380L655 420C655 440 645 450 625 450L165 450C155 450 150 440 150 420Z"
+          fill="#2A9D8F" />
+        <path d="M150 330L615 330L617 336L150 336Z" fill="#E9C46A" />
+        <path d="M150 339L618 339L620 342L150 342Z" fill="#E76F51" />
+        <path d="M195 450C195 385 315 385 315 450Z" fill="#1A1A1A" />
+        <path d="M485 450C485 385 605 385 605 450Z" fill="#1A1A1A" />
+        <circle cx="255" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="255" cy="450" r="24" fill="#EEE" />
+        <circle cx="255" cy="450" r="14" fill="#999" />
+        <circle cx="545" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="545" cy="450" r="24" fill="#EEE" />
+        <circle cx="545" cy="450" r="14" fill="#999" />
+        <rect x="180" y="245" width="80" height="65" rx="6" fill="#1C2833" />
+        <rect x="275" y="245" width="100" height="65" rx="6" fill="#1C2833" />
+        <rect x="390" y="245" width="90" height="65" rx="6" fill="#1C2833" />
+        <path d="M495 245L565 245C570 245 575 248 578 253L602 305C605 310 600 310 595 310L495 310Z" fill="#1C2833" />
+        <path d="M655 330C685 330 685 390 655 390Z" fill="#E76F51" />
+        <path d="M655 345C670 345 670 375 655 375Z" fill="#FDFBF7" />
+        <path d="M152 350L145 350C142 350 142 365 145 365L150 365Z" fill="#E63946" />
+        <path d="M152 365L145 365C142 365 142 370 145 370L150 370Z" fill="#F4A261" />
+      </svg></div>
+  </div>
+
+  <!-- ===================== PATAGONIE ===================== -->
+  <section class="destination dest-patagonie" id="dest-5">
+    <div class="dest-header">
+      <div class="dest-number">06</div>
+      <div class="dest-stamp reveal">🏔️</div>
+      <p class="dest-dates reveal reveal-delay-1">Janvier – Février 2020 · 2 550 km</p>
+      <h2 class="dest-country reveal reveal-delay-2">Patagonie</h2>
+      <p class="dest-tagline reveal reveal-delay-3">La Fin du Monde — glaciers, vent et 5 habitants au km²</p>
+      <span class="dest-km reveal reveal-delay-4">🚌 Santiago → Puerto Montt</span>
+    </div>
+
+    <div class="dest-content">
+      <div class="postcard reveal" style="color:var(--patagonia)">
+        <span class="postcard-stamp">🧊</span>
+        <p class="postcard-text">« Le glacier Perito Moreno : une superficie de deux fois et demi Paris. Sous 70 mètres
+          de mur de glace pendant toute une journée. De temps à autre, un morceau se détache dans un fracas
+          assourdissant et plonge dans le lac. On se croirait devant des images de synthèse — mais c'est réel. »</p>
+        <p class="postcard-from">— El Calafate, Argentina, quelque part entre deux alfajores</p>
+      </div>
+
+      <div class="highlights-grid">
+        <div class="highlight-card reveal" style="color:var(--patagonia)">
+          <span class="highlight-icon">🧊</span>
+          <h3 class="highlight-title">Glacier Perito Moreno</h3>
+          <p class="highlight-text">2,5 fois Paris. 70 mètres de mur de glace. Des morceaux qui se détachent dans un
+            fracas assourdissant et plongent dans le lac en formant des vagues. Le froid n'existe plus, ni les minutes.
+            On est abasourdis.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-1" style="color:var(--patagonia)">
+          <span class="highlight-icon">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span>
+          <h3 class="highlight-title">Torres del Paine</h3>
+          <p class="highlight-text">9h de randonnée (7h pour nous). Le dernier kilomètre sur des rochers prend 1h30. Au
+            sommet : trois pics en forme de fourchette géante, un lac turquoise en base. On se sent tout petit et on
+            répète sans cesse que la nature est incroyable.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-2" style="color:var(--patagonia)">
+          <span class="highlight-icon">⛵</span>
+          <h3 class="highlight-title">La Baleine de Punta Arenas</h3>
+          <p class="highlight-text">Le bateau vers les pingouins demi-tour en raison du vent. Mais : on a vu souffler
+            une baleine. Le commandant fait demi-tour par sécurité — on salue sa rigueur tout en étant un peu déçus.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-3" style="color:var(--patagonia)">
+          <span class="highlight-icon">🍖</span>
+          <h3 class="highlight-title">Bariloche — la Suisse Argentine</h3>
+          <p class="highlight-text">La capitale du chocolat et des fondues. L'Alto El Fuego Parrilla : meilleur
+            restaurant de grillade de la ville. El Ojo de Bife (entrecôte) : la meilleure de notre vie. On se régale. On
+            se sent bien. Il y a même des ARBRES.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-4" style="color:var(--patagonia)">
+          <span class="highlight-icon">🌄</span>
+          <h3 class="highlight-title">Fitz-Roy depuis El Chalten</h3>
+          <p class="highlight-text">La montagne surgit de la forêt de sapins dans un paysage époustouflant. Décision
+            spontanée à 13h de partir grimper jusqu'au point de vue. Sur le chemin du retour, une bière nous interpelle,
+            puis une autre...</p>
+        </div>
+        <div class="highlight-card reveal" style="color:var(--patagonia)">
+          <span class="highlight-icon">🌬️</span>
+          <h3 class="highlight-title">L'ambiance Patagonienne</h3>
+          <p class="highlight-text">Le bus arrive avec 1h30 de retard. Un prophète sans cheval qui fait le tour
+            d'Argentine. Un camping gratuit avec des vaches comme voisines. L'étape Los Antiguos où un seul restaurant
+            existe, un seul menu disponible — magnifique.</p>
+        </div>
+      </div>
+
+      <div style="color:var(--patagonia)">
+        <button class="article-toggle" onclick="toggleArticle(this)">
+          📖 Lire l'article complet : La Patagonie
+          <span class="toggle-arrow">▶</span>
+        </button>
+        <div class="article-full" style="color:var(--patagonia)">
+          <div class="article-inner">
+            <h3>Santiago — avant le grand départ</h3>
+            <p>L'arrivée à l'aéroport de Santiago est marquée par une scène émouvante : une mère en pleurs qui court en
+              criant le prénom de son fils perdu. Tout l'aéroport l'appelle, il est retrouvé 10 minutes plus tard sous
+              un tonnerre d'applaudissements. Ouf.</p>
+            <p>Santiago porte les cicatrices des violents affrontements des derniers mois. Carcasses de voitures
+              incendiées, vitres brisées. Le Mercado Central et ses voleurs actifs. La rue des artistes Barrio
+              Bellavista avec ses fresques colorées comme bouffée d'air.</p>
+            <h3>Punta Arenas — La Fin du Monde</h3>
+            <p>Le bus emprunte la route "El Fin del Mundo". Des chiens équipés d'un pelage de mouton. Un tiers des
+              maisons habité, un tiers abandonné, un tiers difficile à dire. L'ambiance Walking Dead. Notre hôte José,
+              avec une agréable gentillesse qui détonne.</p>
+            <p>Une baleine souffle au large pendant la traversée — incroyable ! Le commandant annonce que la sécurité
+              est compromise et fait demi-tour. Demi-tour avec dignité et soulagement.</p>
+            <h3>Torres del Paine</h3>
+            <p>Puerto Natales, l'auberge Zaltaxar construite en bois brut avec des poêles chaleureux — on se sent dans
+              un chalet cocooning. Un seul sujet de conversation : les Torres. En anglais s'il vous plaît.</p>
+            <p>9h de randonnée (7 pour nous). Le dernier kilomètre sur d'énormes rochers prend 1h30. L'escalade du
+              dernier rocher révèle : une immense fourchette de montagne avec un lac turquoise en base. On reste
+              silencieux les yeux vers le sommet. La nature offre un sacré spectacle.</p>
+            <h3>El Calafate — Perito Moreno</h3>
+            <p>Le glacier. 2,5 fois Paris. Promenade toute la journée sous 70 mètres de mur de glace. De temps à autre,
+              un morceau se détache dans un fracas assourdissant et plonge dans le lac. On se croirait devant un
+              spectacle en images de synthèse. Tous petits. Abasourdis. Le froid n'existe plus, ni les minutes.</p>
+            <h3>El Chalten et Bariloche</h3>
+            <p>El Chalten : entourée d'une barrière de falaise comme au fond d'un cratère de météorite. Le Fitz-Roy qui
+              trône. Randonnée spontanée à 13h vers le point de vue. La forêt de sapins, la montagne majestueuse, et des
+              bières sur le retour.</p>
+            <p>Los Antiguos, la ville de nulle part avec un seul restaurant, un seul menu sur un bout de papier, et un
+              ragoût délicieux. Un énergumène du soir raconte vouloir faire le tour d'Argentine à cheval, sans cheval,
+              pendant 6 ans, en dormant sous un arbre.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider">
+    <div class="divider-road"></div>
+    <div class="divider-van" style="animation-delay:-1.5s"><svg xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 800 600">
+        <circle cx="580" cy="220" r="110" fill="#F4A261" opacity="0.15" />
+        <circle cx="580" cy="220" r="75" fill="#E9C46A" opacity="0.3" />
+        <ellipse cx="400" cy="492" rx="280" ry="8" fill="#000" opacity="0.15" />
+        <polygon points="210,165 480,225 210,225" fill="#D4C5B0" />
+        <path d="M190 160L500 220C510 222 510 225 500 225L190 168C180 166 180 162 190 160Z" fill="#FDFBF7" />
+        <path d="M150 330L165 240C170 230 180 225 190 225L540 225C560 225 570 230 580 245L615 330Z" fill="#FDFBF7" />
+        <path
+          d="M150 330L615 330C625 350 650 355 655 380L655 420C655 440 645 450 625 450L165 450C155 450 150 440 150 420Z"
+          fill="#2A9D8F" />
+        <path d="M150 330L615 330L617 336L150 336Z" fill="#E9C46A" />
+        <path d="M150 339L618 339L620 342L150 342Z" fill="#E76F51" />
+        <path d="M195 450C195 385 315 385 315 450Z" fill="#1A1A1A" />
+        <path d="M485 450C485 385 605 385 605 450Z" fill="#1A1A1A" />
+        <circle cx="255" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="255" cy="450" r="24" fill="#EEE" />
+        <circle cx="255" cy="450" r="14" fill="#999" />
+        <circle cx="545" cy="450" r="42" fill="#2B2B2B" />
+        <circle cx="545" cy="450" r="24" fill="#EEE" />
+        <circle cx="545" cy="450" r="14" fill="#999" />
+        <rect x="180" y="245" width="80" height="65" rx="6" fill="#1C2833" />
+        <rect x="275" y="245" width="100" height="65" rx="6" fill="#1C2833" />
+        <rect x="390" y="245" width="90" height="65" rx="6" fill="#1C2833" />
+        <path d="M495 245L565 245C570 245 575 248 578 253L602 305C605 310 600 310 595 310L495 310Z" fill="#1C2833" />
+        <path d="M655 330C685 330 685 390 655 390Z" fill="#E76F51" />
+        <path d="M655 345C670 345 670 375 655 375Z" fill="#FDFBF7" />
+        <path d="M152 350L145 350C142 350 142 365 145 365L150 365Z" fill="#E63946" />
+        <path d="M152 365L145 365C142 365 142 370 145 370L150 370Z" fill="#F4A261" />
+      </svg></div>
+  </div>
+
+  <!-- ===================== BOLIVIE ===================== -->
+  <section class="destination dest-bolivie" id="dest-6">
+    <div class="dest-header">
+      <div class="dest-number">07</div>
+      <div class="dest-stamp reveal">⛏️</div>
+      <p class="dest-dates reveal reveal-delay-1">Février – Mars 2020 · de 3 660m à 4 100m</p>
+      <h2 class="dest-country reveal reveal-delay-2">Bolivie</h2>
+      <p class="dest-tagline reveal reveal-delay-3">Perchée dans les nuages — sel, altitude et reflets infinis</p>
+      <span class="dest-km reveal reveal-delay-4">🚌 La Paz · Uyuni · Potosí · Sucre · Cochabamba</span>
+    </div>
+
+    <div class="dest-content">
+      <div class="postcard reveal" style="color:var(--bolivia)">
+        <span class="postcard-stamp">🌕</span>
+        <p class="postcard-text">« Au cœur du Salar, les nuages et le volcan au loin se reflètent parfaitement dans
+          l'eau salée. On se retrouve au milieu d'un désert sans relief, on se sent tout petit. Deux soleils se couchent
+          — un dans le ciel, un dans l'eau. On reste tous les six sans voix. »</p>
+        <p class="postcard-from">— Salar d'Uyuni, au milieu de nulle part, en panne</p>
+      </div>
+
+      <div class="highlights-grid">
+        <div class="highlight-card reveal" style="color:var(--bolivia)">
+          <span class="highlight-icon">🧂</span>
+          <h3 class="highlight-title">Salar d'Uyuni</h3>
+          <p class="highlight-text">Le plus grand désert de sel au monde. 3h30 de panne de voiture pour faire des photos
+            perspectives. Deux soleils au coucher : un dans le ciel, un dans l'eau. On reste tous sans voix face au
+            spectacle.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-1" style="color:var(--bolivia)">
+          <span class="highlight-icon">🚂</span>
+          <h3 class="highlight-title">Le Cimetière des Trains</h3>
+          <p class="highlight-text">20 carcasses de locomotives à vapeur du début du XXe siècle, importées de
+            Grande-Bretagne, rongées par les vents salés. Abandonnées, vandalisées. La Bolivie préfère les laisser en
+            place plutôt que de les restaurer.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-2" style="color:var(--bolivia)">
+          <span class="highlight-icon">🌆</span>
+          <h3 class="highlight-title">La Paz au coucher du soleil</h3>
+          <p class="highlight-text">Depuis le rooftop Carrot Tree : les collines se couvrent de milliers de lumières au
+            coucher du soleil. Entourés de collines, les habitations aux briques rouges allument une à une leurs
+            fenêtres. Un spectacle mystique.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-3" style="color:var(--bolivia)">
+          <span class="highlight-icon">🎭</span>
+          <h3 class="highlight-title">Carnaval à Uyuni</h3>
+          <p class="highlight-text">Arrivée dans une ville de fantômes alcooliques. Tous les Tour Operators fermés pour
+            le carnaval. Certains chauffeurs "complètement WASTED" à 8h du matin. On attend quelques jours en évitant
+            les torrents de boue et les bouteilles de bière jetées au sol.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-4" style="color:var(--bolivia)">
+          <span class="highlight-icon">🏛️</span>
+          <h3 class="highlight-title">Sucre, la belle capitale</h3>
+          <p class="highlight-text">La deuxième capitale bolivienne, mieux entretenue. Les magnifiques bâtiments blancs,
+            les pâtisseries délicieuses (avec un nom pareil...), les marchés gigantesques. Un vrai coup de cœur après La
+            Paz.</p>
+        </div>
+        <div class="highlight-card reveal" style="color:var(--bolivia)">
+          <span class="highlight-icon">✝️</span>
+          <h3 class="highlight-title">Le Christ de Cochabamba</h3>
+          <p class="highlight-text">34 mètres — plus imposant que celui de Rio ! Plusieurs milliers de marches. Le
+            réveil était prévu à 7h, on part à 11h. Le résultat est le même : une vue panoramique magnifique sur
+            Cochabamba.</p>
+        </div>
+      </div>
+
+      <div style="color:var(--bolivia)">
+        <button class="article-toggle" onclick="toggleArticle(this)">
+          📖 Lire l'article complet : La Bolivie
+          <span class="toggle-arrow">▶</span>
+        </button>
+        <div class="article-full" style="color:var(--bolivia)">
+          <div class="article-inner">
+            <h3>La Bolivie en altitude</h3>
+            <p>Coincée entre cinq pays, la Bolivie est perchée dans les nuages. Capital administrative La Paz à 3 660m,
+              capitale constitutionnelle Sucre à 2 800m, et le désert d'Uyuni quelque part entre les deux. La
+              température varie de -10°C à +20°C en un seul trajet de bus. On s'endort dans un désert et on se réveille
+              dans des sommets de glace.</p>
+            <h3>La Paz — première impression</h3>
+            <p>Sortie de l'avion à l'aube, dans la première capitale. Des collines en forme d'immenses vagues avec des
+              habitations aux briques rouges accrochées partout, jusqu'aux derniers centimètres. Un décor irréaliste,
+              post-apocalyptique. Le bus-missile à 4,5 bolivianos où le chauffeur ne change jamais de billet de 100.</p>
+            <p>Le Carrot Tree le soir : au rooftop avec des baies vitrées à la place des murs, les collines s'illuminent
+              une à une. Un spectacle mystique que nous recommandons chaudement.</p>
+            <h3>Uyuni — la ville fantôme</h3>
+            <p>Des rues de terre et de plastique. L'air imprégné de poussière et de bière. Les habitants titubants, une
+              bière à la main, qu'ils jettent au sol à peine terminée. Il est 8h du matin. Pas vraiment le coup de cœur.
+            </p>
+            <p>Les avis des agences de Jeep pour le Salar sont... terrifiants. Chauffeurs ivres dès 8h, accidents
+              mortels, conducteurs qui ont "oublié leur anglais". On finit par trouver Uyuni Expedition, la seule
+              sérieuse. Tomas, sobre, qui respecte les limitations. On va survivre.</p>
+            <h3>Le Salar</h3>
+            <p>D'abord le cimetière de trains : 20 locomotives à vapeur britanniques du début du XXe siècle, rongées par
+              le sel. Abandonnées, vandalisées. La Bolivie les laisse en place.</p>
+            <p>Puis le Salar. 3h30 de panne pour faire des photos perspectives avec un lama en sel acheté au marché.
+              Beaucoup de fous rires et de douleurs aux genoux. Le déjeuner dans le 4x4 en panne. La route vers le cœur
+              du Salar où enfin, plus d'autres voitures. Les nuages et le volcan se reflètent parfaitement. Deux soleils
+              au coucher. Silence.</p>
+            <h3>Sucre — le vrai coup de cœur</h3>
+            <p>Quatre heures de bus et quelques milliers de mètres plus bas : Sucre. L'air est disponible. Les bâtiments
+              blancs magnifiques se succèdent. Des pâtisseries à tous les coins de rue (avec le nom de la ville, ils
+              avaient une obligation). Le Mercado Central : une heure pour en faire le tour. Jus de fruits frais, pâtes
+              bolognaises. Les journées s'enchaînent avec de bons cappuccinos au soleil.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INSTAGRAM CTA ===================== -->
+  <section
+    style="background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7); padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden;">
+    <!-- Decorative circles -->
+    <div
+      style="position:absolute;top:-60px;left:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.08);">
+    </div>
+    <div
+      style="position:absolute;bottom:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.06);">
+    </div>
+    <div
+      style="position:absolute;top:30px;right:15%;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.05);">
+    </div>
+
+    <div style="position:relative;z-index:2;max-width:700px;margin:0 auto;">
+      <!-- Instagram icon -->
+      <div style="margin-bottom:1.5rem;">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+          style="filter:drop-shadow(0 4px 16px rgba(0,0,0,0.2))">
+          <rect x="4" y="4" width="56" height="56" rx="16" fill="white" />
+          <rect x="12" y="12" width="40" height="40" rx="10" fill="url(#ig-grad)" opacity="0.15" />
+          <circle cx="32" cy="32" r="10" stroke="url(#ig-grad2)" stroke-width="3" fill="none" />
+          <circle cx="44" cy="20" r="3" fill="url(#ig-grad2)" />
+          <rect x="12" y="12" width="40" height="40" rx="10" stroke="url(#ig-grad2)" stroke-width="3" fill="none" />
+          <defs>
+            <linearGradient id="ig-grad" x1="4" y1="4" x2="60" y2="60">
+              <stop offset="0%" stop-color="#f9ce34" />
+              <stop offset="50%" stop-color="#ee2a7b" />
+              <stop offset="100%" stop-color="#6228d7" />
+            </linearGradient>
+            <linearGradient id="ig-grad2" x1="4" y1="4" x2="60" y2="60">
+              <stop offset="0%" stop-color="#f9ce34" />
+              <stop offset="50%" stop-color="#ee2a7b" />
+              <stop offset="100%" stop-color="#6228d7" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <h2
+        style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:white;line-height:1.1;margin-bottom:1rem;text-shadow:0 2px 12px rgba(0,0,0,0.2);">
+        Les photos qui ne rentrent pas dans les mots
+      </h2>
+      <p
+        style="font-family:'Caveat',cursive;font-size:clamp(1.1rem,2.5vw,1.5rem);color:rgba(255,255,255,0.9);margin-bottom:2rem;line-height:1.6;">
+        Moaïs au coucher du soleil, yaks à 3 800m, pingouins maladroits, glaciers qui s'effondrent...<br>
+        Tout ce que l'on n'a pas réussi à mettre en mots se trouve sur Instagram 📸
+      </p>
+
+      <a href="https://www.instagram.com/tongetsacados/" target="_blank" style="
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: white;
+      color: #ee2a7b;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.02em;
+    " onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 48px rgba(0,0,0,0.25)'"
+        onmouseout="this.style.transform='';this.style.boxShadow='0 8px 32px rgba(0,0,0,0.2)'">
+        <svg width="22" height="22" viewBox="0 0 64 64" fill="none">
+          <rect x="4" y="4" width="56" height="56" rx="16" stroke="#ee2a7b" stroke-width="4" fill="none" />
+          <circle cx="32" cy="32" r="10" stroke="#ee2a7b" stroke-width="4" fill="none" />
+          <circle cx="44" cy="20" r="3" fill="#ee2a7b" />
+        </svg>
+        Suivre l'aventure sur Instagram
+      </a>
+
+      <p style="font-family:'Caveat',cursive;font-size:1rem;color:rgba(255,255,255,0.6);margin-top:1.5rem;">
+        @tongetsacados · 43 000 km de contenu 🌍
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, #3d3020, #2b2416);"></div>
+    <div style="position:relative;z-index:2;">
+      <div class="footer-van">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="180" height="135">
+          <ellipse cx="400" cy="492" rx="280" ry="8" fill="#ffffff" opacity="0.1" />
+          <polygon points="210,165 480,225 210,225" fill="#D4C5B0" />
+          <polygon points="230,185 350,220 230,220" fill="#2A2A2A" opacity="0.4" />
+          <path d="M 190 160 L 500 220 C 510 222 510 225 500 225 L 190 168 C 180 166 180 162 190 160 Z"
+            fill="#FDFBF7" />
+          <path d="M 150 330 L 165 240 C 170 230 180 225 190 225 L 540 225 C 560 225 570 230 580 245 L 615 330 Z"
+            fill="#FDFBF7" />
+          <path
+            d="M 150 330 L 615 330 C 625 350 650 355 655 380 L 655 420 C 655 440 645 450 625 450 L 165 450 C 155 450 150 440 150 420 Z"
+            fill="#2A9D8F" />
+          <path d="M 150 330 L 615 330 L 617 336 L 150 336 Z" fill="#E9C46A" />
+          <path d="M 150 339 L 618 339 L 620 342 L 150 342 Z" fill="#E76F51" />
+          <path d="M 195 450 C 195 385, 315 385, 315 450 Z" fill="#1A1A1A" />
+          <path d="M 485 450 C 485 385, 605 385, 605 450 Z" fill="#1A1A1A" />
+          <circle cx="255" cy="450" r="42" fill="#2B2B2B" />
+          <circle cx="255" cy="450" r="24" fill="#EEEEEE" />
+          <circle cx="255" cy="450" r="14" fill="#999999" />
+          <circle cx="252" cy="447" r="5" fill="#FFFFFF" opacity="0.7" />
+          <circle cx="545" cy="450" r="42" fill="#2B2B2B" />
+          <circle cx="545" cy="450" r="24" fill="#EEEEEE" />
+          <circle cx="545" cy="450" r="14" fill="#999999" />
+          <circle cx="542" cy="447" r="5" fill="#FFFFFF" opacity="0.7" />
+          <rect x="180" y="245" width="80" height="65" rx="6" fill="#1C2833" />
+          <rect x="275" y="245" width="100" height="65" rx="6" fill="#1C2833" />
+          <rect x="390" y="245" width="90" height="65" rx="6" fill="#1C2833" />
+          <path d="M 495 245 L 565 245 C 570 245 575 248 578 253 L 602 305 C 605 310 600 310 595 310 L 495 310 Z"
+            fill="#1C2833" />
+          <path d="M 655 330 C 685 330 685 390 655 390 Z" fill="#E76F51" />
+          <path d="M 655 345 C 670 345 670 375 655 375 Z" fill="#FDFBF7" />
+          <path d="M 152 350 L 145 350 C 142 350 142 365 145 365 L 150 365 Z" fill="#E63946" />
+          <path d="M 152 365 L 145 365 C 142 365 142 370 145 370 L 150 370 Z" fill="#F4A261" />
+          <path d="M 160 425 L 135 425 C 130 425 130 440 135 440 L 155 440 Z" fill="#E0E0E0" />
+          <path d="M 640 425 L 670 425 C 675 425 675 440 670 440 L 635 440 Z" fill="#E0E0E0" />
+          <g stroke="#FDFBF7" stroke-width="3" stroke-linecap="round" fill="none">
+            <circle cx="330" cy="390" r="22" />
+            <line x1="330" y1="368" x2="330" y2="412" />
+            <line x1="330" y1="390" x2="315" y2="408" />
+            <line x1="330" y1="390" x2="345" y2="408" />
+          </g>
+        </svg>
+      </div>
+      <h2 class="footer-title">La route est terminée.</h2>
+      <p class="footer-sub">Mais le voyage, lui, ne s'arrête jamais vraiment...</p>
+
+      <div class="footer-stats">
+        <div class="footer-stat">
+          <span class="n">7</span>
+          <span class="l">pays</span>
+        </div>
+        <div class="footer-stat">
+          <span class="n">43 000</span>
+          <span class="l">km parcourus</span>
+        </div>
+        <div class="footer-stat">
+          <span class="n">11</span>
+          <span class="l">mois</span>
+        </div>
+        <div class="footer-stat">
+          <span class="n">3</span>
+          <span class="l">vans (Raoul, Rollo, Manutea)</span>
+        </div>
+        <div class="footer-stat">
+          <span class="n">∞</span>
+          <span class="l">waouh</span>
+        </div>
+      </div>
+
+      <p style="margin-top:3rem;font-family:'Caveat',cursive;font-size:1rem;opacity:0.4;">
+        Réalisé avec ❤️ et beaucoup de pâtes instantanées · Élodie & Flo · 2019–2020
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // ===================== VAN NAVIGATION =====================
+    const destIds = ['dest-0', 'dest-1', 'dest-2', 'dest-3', 'dest-4', 'dest-5', 'dest-6'];
+    const roadDests = document.querySelectorAll('.road-dest');
+    const roadVan = document.getElementById('road-van');
+    let currentDest = 0;
+
+    function getDestPosition(idx) {
+      const dest = roadDests[idx];
+      const track = document.querySelector('.road-track');
+      const trackRect = track.getBoundingClientRect();
+      const dotEl = dest.querySelector('.dest-dot');
+      const dotRect = dotEl.getBoundingClientRect();
+      // Position relative to road-track (the van's positioning parent)
+      const relLeft = dotRect.left - trackRect.left + dotRect.width / 2;
+      return relLeft;
+    }
+
+    function moveVan(idx, animate) {
+      const pos = getDestPosition(idx);
+      if (animate) {
+        roadVan.classList.add('driving');
+        setTimeout(() => roadVan.classList.remove('driving'), 900);
+      }
+      // Van SVG viewBox is 0-800, van body center is ~x=400 → 50% of rendered width
+      const vanSvg = roadVan.querySelector('svg');
+      const vanWidth = vanSvg.getBoundingClientRect().width;
+      const vanCenterOffset = vanWidth * 0.5; // visual center of the van body
+      roadVan.style.left = (pos - vanCenterOffset) + 'px';
+
+      // Update active state
+      roadDests.forEach((d, i) => {
+        d.classList.toggle('active', i === idx);
+      });
+      currentDest = idx;
+    }
+
+    function goTo(idx) {
+      moveVan(idx, true);
+      const section = document.getElementById(destIds[idx]);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Initialize van position
+    window.addEventListener('load', () => {
+      setTimeout(() => moveVan(0, false), 100);
+    });
+
+    window.addEventListener('resize', () => {
+      moveVan(currentDest, false);
+    });
+
+    // ===================== SCROLL TRACKING =====================
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+          const id = entry.target.id;
+          const idx = destIds.indexOf(id);
+          if (idx !== -1 && idx !== currentDest) {
+            moveVan(idx, true);
+          }
+        }
+      });
+    }, { threshold: [0.1, 0.3] });
+
+    destIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // ===================== SCROLL REVEAL =====================
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // Hero reveals immediately
+    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 200 + 300);
+    });
+
+    // ===================== ARTICLE TOGGLE =====================
+    function toggleArticle(btn) {
+      const article = btn.nextElementSibling;
+      const isOpen = article.classList.contains('open');
+      btn.classList.toggle('open', !isOpen);
+      article.classList.toggle('open', !isOpen);
+      btn.querySelector('.toggle-arrow').textContent = isOpen ? '▶' : '▼';
+    }
+
+    // ===================== VAN WHEEL ANIMATION =====================
+    // Add subtle wheel spin when driving
+    const style = document.createElement('style');
+    style.textContent = `
+    @keyframes wheelSpin {
+      from { transform: rotate(0deg); }
+      to { transform { transform: rotate(360deg); } }
+    }
+  `;
+    document.head.appendChild(style);
+  </script>
+</body>
+
+</html>
